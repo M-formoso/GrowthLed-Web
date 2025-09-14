@@ -5,22 +5,22 @@ import { Calendar } from "lucide-react";
 const NewsSection = () => {
   const news = [
     {
-      date: "30 de Junio",
-      title: "COVID-19",
-      description: "Sistemas de desinfección sin contacto",
-      image: "https://images.unsplash.com/photo-1584744982491-665216d95f8b?w=400&h=300&fit=crop",
+      date: "15 de Marzo",
+      title: "Parque Industrial Pilar",
+      description: "Iluminación LED completa para 50,000 m² de parque industrial con sistema de control inteligente",
+      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop",
     },
     {
       date: "5 de Febrero", 
-      title: "Supermercado en La Plata",
-      description: "Proyecto eléctrico, instalación y provisión de luminarias LED para supermercado en la ciudad de La Plata",
-      image: "https://images.unsplash.com/photo-1556740738-b6a63e27c4df?w=400&h=300&fit=crop",
+      title: "Centro Logístico Mercado Libre",
+      description: "Proyecto integral de red eléctrica de MT/BT y iluminación LED para centro logístico de 80,000 m²",
+      image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&h=300&fit=crop",
     },
     {
-      date: "15 de Enero",
-      title: "Centro Comercial LED",
-      description: "Instalación completa de sistema LED para centro comercial con control inteligente",
-      image: "https://images.unsplash.com/photo-1555529669-2269763671c0?w=400&h=300&fit=crop",
+      date: "28 de Enero",
+      title: "Complejo Industrial YPF",
+      description: "Instalación de redes eléctricas de media tensión y sistema de iluminación LED industrial antiexplosivo",
+      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop",
     },
   ];
 

@@ -8,33 +8,33 @@ import renewableImage from "@/assets/renewable-energy.jpg";
 const ServicesGrid = () => {
   const services = [
     {
-      title: "Comercial / Residencial",
-      image: heroBackground,
+      title: "Industrial / Grandes Obras",
+      image: industrialImage,
       gradient: "bg-service-gradient-1",
     },
     {
-      title: "Industrial / Estaciones de servicios", 
+      title: "Parques Industriales", 
       image: industrialImage,
       gradient: "bg-service-gradient-2",
     },
     {
-      title: "Deportiva",
-      image: sportsImage,
+      title: "Centros Logísticos",
+      image: heroBackground,
       gradient: "bg-service-gradient-3",
     },
     {
-      title: "Iluminación para cultivos",
-      image: renewableImage,
+      title: "Comercial / Retail",
+      image: heroBackground,
       gradient: "bg-service-gradient-4",
     },
     {
-      title: "Energías alternativas",
-      image: renewableImage,
+      title: "Deportiva / Institucional",
+      image: sportsImage,
       gradient: "bg-service-gradient-5",
     },
     {
-      title: "Pública",
-      image: industrialImage,
+      title: "Energías Renovables",
+      image: renewableImage,
       gradient: "bg-service-gradient-6",
     },
   ];
