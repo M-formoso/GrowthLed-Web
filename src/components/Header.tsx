@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import growthledLogo from "@/assets/growthled-logo.jpeg";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,15 +21,13 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center">
-              <div className="w-6 h-6 bg-foreground rounded-sm"></div>
-            </div>
-            <div>
-              <h1 className="text-2xl font-bold text-foreground">GROWTHLED</h1>
-              <p className="text-xs text-muted-foreground">We illuminate</p>
-            </div>
-          </div>
+          <Link to="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+            <img 
+              src={growthledLogo} 
+              alt="GROWTHLED - We illuminate" 
+              className="h-12 w-auto object-contain"
+            />
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
