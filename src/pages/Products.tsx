@@ -26,8 +26,9 @@ const Products = () => {
       specs: ["Potencias: 100W - 500W", "Altura óptima: 8-25m", "Eficiencia: >140 lm/W", "IP65 - Antipolvo/agua"],
       applications: ["Centros logísticos", "Plantas industriales", "Almacenes de gran altura", "Centros de distribución"],
       catalogs: [
-        { name: "B2GHB12 CAMPANA LED GROWTHLED", file: "B2GHB12CAMPANA-LED-GROWTHLED.pdf" },
-        { name: "Catálogo GROWTHLED CAMPANAS ECO", file: "Catalogo-GROWTHLED-CAMPANAS-ECO.pdf" }
+        { name: "B2GHB12 CAMPANA LED GROWTHLED", file: "B2GHB12CAMPANA LED GROWTHLED.pdf" },
+        { name: "Catálogo GROWTHLED CAMPANAS ECO", file: "Catalogo GROWTHLED CAMPANAS ECO _pages-to-jpg-0001 (1) (1)-11-12.pdf" },
+        { name: "CAT 100W GROWTHLED FICHA TÉCNICA", file: "CAT 100W GROWTHLED.FICHA TECNICA PDF.pdf" }
       ]
     },
     {
@@ -41,8 +42,10 @@ const Products = () => {
       specs: ["Potencias: 200W - 1000W", "Luminosidad: >500 lux", "Control individual", "Resistencia UV superior"],
       applications: ["Estadios de fútbol", "Canchas de tenis", "Complejos deportivos", "Pistas de atletismo"],
       catalogs: [
-        { name: "HPI GROWTH LED DEPORTIVO", file: "HPI-GROWTH-LED-DEPORTIVO.pdf" },
-        { name: "GROWTH LED Proyector Deportivo HF", file: "GROWTH-LEDFicha-Tecnica-PROYECTOR-DEP-HF.pdf" }
+        { name: "HPI GROWTH LED DEPORTIVO Y INDUSTRIA", file: "HPI GROWTH LED DEPORTIVO Y INDUSTRIA.pdf" },
+        { name: "HPI GROWTH LED DEPORTIVO", file: "HPI GROWTH LED DEPORTIVO..pdf" },
+        { name: "GROWTH LED Proyector Deportivo HF", file: "GROWTH LEDFicha Técnica - PROYECTOR DEP HF.pdf" },
+        { name: "Catálogo Deportivo GROWTH LED", file: "Catálogo-Deportivo- GROWTH LED.pdf" }
       ]
     },
     {
@@ -56,7 +59,7 @@ const Products = () => {
       specs: ["Potencias: 50W - 300W", "Altura: 4-12 metros", "Control inteligente", "Vida útil: >50,000h"],
       applications: ["Alumbrado público", "Parques industriales", "Avenidas principales", "Zonas peatonales"],
       catalogs: [
-        { name: "FAROLA GROWTH LED NEW2025", file: "FAROLA-GROWTH-LED-NEW2025.pdf" }
+        { name: "FAROLA GROWTH LED NEW2025", file: "FAROLA GROWTH LED NEW2025.pdf" }
       ]
     },
     {
@@ -70,8 +73,8 @@ const Products = () => {
       specs: ["Autonomía: 5-10 días", "Panel: 80W-200W", "Batería litio", "Instalación sin cableado"],
       applications: ["Zonas rurales", "Parques y plazas", "Rutas sin electrificación", "Proyectos sustentables"],
       catalogs: [
-        { name: "EVEREST All in One SOLAR", file: "EVEREST-All-in-One-SOLAR.pdf" },
-        { name: "LUMINARIA SOLAR", file: "LUMINARIA-SOLAR.pdf" }
+        { name: "EVEREST All in One SOLAR", file: "EVEREST All in One  SOLAR_page-0001.pdf" },
+        { name: "LUMINARIA SOLAR", file: "LUMINARIA  SOLAR_page-0001.pdf" }
       ]
     },
     {
@@ -85,7 +88,11 @@ const Products = () => {
       specs: ["Longitudes: 0.6m - 2.4m", "Conectables en serie", "Difusor opalino", "Montaje versátil"],
       applications: ["Líneas de producción", "Pasillos industriales", "Áreas de inspección", "Talleres especializados"],
       catalogs: [
-        { name: "LEDSTATION LINEAL GROWTH LED", file: "LEDSTATION-LINEAL-GROWTH-LED.pdf" }
+        { name: "LEDSTATION LINEAL GROWTH LED", file: "LEDSTATION LINEAL GROWTH LED..pdf" },
+        { name: "Catálogo Iluminación Grandes Superficies", file: "Catálogo-Iluminación-Grandes-Superficies-GROWTH LED.pdf" },
+        { name: "GEA 70W GROWTH", file: "GEA 70W GROWTH.pdf" },
+        { name: "GEA PI 32 100W GROWTH LED", file: "GEA PI 32 100W GROWTH LED.pdf" },
+        { name: "GEA PI 32 70W GROWTH LED", file: "GEA PI 32 70W GROWTH LED.pdf" }
       ]
     },
     {
@@ -99,8 +106,8 @@ const Products = () => {
       specs: ["Certificación ATEX", "Zona 1 y Zona 2", "Carcasa reforzada", "Sellado hermético"],
       applications: ["Plantas petroquímicas", "Refinerías", "Instalaciones mineras", "Ambientes explosivos"],
       catalogs: [
-        { name: "Ledstation Zona 2 EESS GNC", file: "Ledstation-Zona-2-EESS-GNC-GROWTH-LED.pdf" },
-        { name: "LEDSTATION 100W LIQUIDO", file: "LEDSTATION-100W-LIQUIDO-GROWTH-LED.pdf" }
+        { name: "Ledstation Zona 2 EESS GNC GROWTH LED", file: "Ledstation Zona 2 EESS GNC GROWTH LED..pdf" },
+        { name: "LEDSTATION 100W LIQUIDO GROWTH LED", file: "LEDSTATION 100W LIQUIDO GROWTH LED.pdf" }
       ]
     }
   ];
@@ -109,7 +116,7 @@ const Products = () => {
     console.log(`Downloading: ${filename}`);
     // Aquí irá la lógica para descargar el PDF desde public/catalogs/
     const link = document.createElement('a');
-    link.href = `/catalogs/${filename}`;
+    link.href = `/catalogos/${filename}`;
     link.download = filename;
     link.click();
   };
