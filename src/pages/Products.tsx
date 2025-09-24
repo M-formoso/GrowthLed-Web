@@ -1,176 +1,304 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Download, FileText, Lightbulb, Building2, Sun, Zap, Car, Factory } from "lucide-react";
+import { Download, FileText, Factory, Zap, Lightbulb, Sun, Activity, Shield, Eye, X } from "lucide-react";
 import Header from "@/components/Header";
+import ContactSection from "@/components/ContactSection";
+import campanasLed from "@/assets/productos/campanas-led.jpg";
+import proyectoresDeportivos from "@/assets/productos/proyectores-deportivos.jpg";
+import farolasUrbanas from "@/assets/productos/farolas-urbanas.jpg";
+import solares from "@/assets/productos/solares.jpg";
+import lineales from "@/assets/productos/lineales.jpg";
+import antiexplosion from "@/assets/productos/antiexplosion.jpg";
 
 const Products = () => {
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+
   const productCategories = [
     {
-      title: "Iluminación Deportiva",
-      description: "Sistemas de iluminación LED especializados para instalaciones deportivas",
-      icon: <Zap className="h-6 w-6" />,
-      gradient: "from-blue-500 to-cyan-400",
-      catalogs: [
-        { name: "HPI GROWTH LED DEPORTIVO Y INDUSTRIA", file: "HPI-GROWTH-LED-DEPORTIVO-Y-INDUSTRIA.pdf" },
-        { name: "HPI GROWTH LED DEPORTIVO", file: "HPI-GROWTH-LED-DEPORTIVO.pdf" },
-        { name: "Catálogo Deportivo GROWTH LED", file: "Catalogo-Deportivo-GROWTH-LED.pdf" }
-      ]
-    },
-    {
-      title: "Iluminación Industrial",
-      description: "Soluciones LED para grandes superficies e instalaciones industriales",
-      icon: <Factory className="h-6 w-6" />,
-      gradient: "from-orange-500 to-red-400",
-      catalogs: [
-        { name: "Catálogo Iluminación Grandes Superficies", file: "Catalogo-Iluminacion-Grandes-Superficies-GROWTH-LED.pdf" },
-        { name: "HPI GROWTH LED DEPORTIVO Y INDUSTRIA", file: "HPI-GROWTH-LED-DEPORTIVO-Y-INDUSTRIA.pdf" }
-      ]
-    },
-    {
-      title: "Luminarias Solares",
-      description: "Sistemas de iluminación solar autónomos y sostenibles",
-      icon: <Sun className="h-6 w-6" />,
-      gradient: "from-yellow-500 to-orange-400",
-      catalogs: [
-        { name: "EVEREST All in One SOLAR", file: "EVEREST-All-in-One-SOLAR.pdf" },
-        { name: "LUMINARIA SOLAR", file: "LUMINARIA-SOLAR.pdf" }
-      ]
-    },
-    {
-      title: "Farolas LED",
-      description: "Farolas LED urbanas de alta eficiencia energética",
-      icon: <Lightbulb className="h-6 w-6" />,
-      gradient: "from-green-500 to-teal-400",
-      catalogs: [
-        { name: "FAROLA GROWTH LED NEW2025", file: "FAROLA-GROWTH-LED-NEW2025.pdf" }
-      ]
-    },
-    {
-      title: "Campanás LED",
-      description: "Campanás LED industriales para naves y almacenes",
-      icon: <Building2 className="h-6 w-6" />,
-      gradient: "from-purple-500 to-indigo-400",
+      id: 1,
+      title: "CAMPANAS LED INDUSTRIALES",
+      subtitle: "Para Naves y Almacenes de Gran Altura",
+      description: "Sistemas de iluminación LED de alta potencia diseñados para instalaciones industriales de gran envergadura. Ideales para naves, almacenes, centros logísticos y plantas de producción que requieren iluminación uniforme y eficiente a más de 8 metros de altura.",
+      image: campanasLed,
+      icon: <Factory className="h-8 w-8" />,
+      gradient: "from-blue-600/80 to-cyan-500/80",
+      specs: ["Potencias: 100W - 500W", "Altura óptima: 8-25m", "Eficiencia: >140 lm/W", "IP65 - Antipolvo/agua"],
+      applications: ["Centros logísticos", "Plantas industriales", "Almacenes de gran altura", "Centros de distribución"],
       catalogs: [
         { name: "B2GHB12 CAMPANA LED GROWTHLED", file: "B2GHB12CAMPANA-LED-GROWTHLED.pdf" },
         { name: "Catálogo GROWTHLED CAMPANAS ECO", file: "Catalogo-GROWTHLED-CAMPANAS-ECO.pdf" }
       ]
     },
     {
-      title: "Serie GEA",
-      description: "Proyectores LED de la serie GEA para múltiples aplicaciones",
-      icon: <Zap className="h-6 w-6" />,
-      gradient: "from-teal-500 to-blue-400",
+      id: 2,
+      title: "PROYECTORES DEPORTIVOS",
+      subtitle: "Iluminación de Alto Rendimiento",
+      description: "Proyectores LED de última generación especialmente diseñados para instalaciones deportivas profesionales. Garantizan niveles de iluminación superiores a 500 lux con uniformidad excepcional, cumpliendo normativas FIFA, UEFA y otras federaciones internacionales.",
+      image: proyectoresDeportivos,
+      icon: <Zap className="h-8 w-8" />,
+      gradient: "from-orange-600/80 to-red-500/80",
+      specs: ["Potencias: 200W - 1000W", "Luminosidad: >500 lux", "Control individual", "Resistencia UV superior"],
+      applications: ["Estadios de fútbol", "Canchas de tenis", "Complejos deportivos", "Pistas de atletismo"],
       catalogs: [
-        { name: "GEA 70W GROWTH", file: "GEA-70W-GROWTH.pdf" },
-        { name: "GEA PI 32 70W GROWTH LED", file: "GEA-PI-32-70W-GROWTH-LED.pdf" },
-        { name: "GEA PI 32 100W GROWTH LED", file: "GEA-PI-32-100W-GROWTH-LED.pdf" }
+        { name: "HPI GROWTH LED DEPORTIVO", file: "HPI-GROWTH-LED-DEPORTIVO.pdf" },
+        { name: "GROWTH LED Proyector Deportivo HF", file: "GROWTH-LEDFicha-Tecnica-PROYECTOR-DEP-HF.pdf" }
       ]
     },
     {
-      title: "Serie LEDSTATION",
-      description: "Estaciones LED especializadas para diferentes aplicaciones",
-      icon: <Car className="h-6 w-6" />,
-      gradient: "from-indigo-500 to-purple-400",
+      id: 3,
+      title: "FAROLAS URBANAS LED",
+      subtitle: "Iluminación Pública Eficiente",
+      description: "Soluciones completas de alumbrado público LED con tecnología fotométrica avanzada. Diseñadas para reducir hasta 70% el consumo energético manteniendo niveles óptimos de seguridad vial y peatonal en entornos urbanos e industriales.",
+      image: farolasUrbanas,
+      icon: <Lightbulb className="h-8 w-8" />,
+      gradient: "from-green-600/80 to-teal-500/80",
+      specs: ["Potencias: 50W - 300W", "Altura: 4-12 metros", "Control inteligente", "Vida útil: >50,000h"],
+      applications: ["Alumbrado público", "Parques industriales", "Avenidas principales", "Zonas peatonales"],
       catalogs: [
-        { name: "LEDSTATION 100W LIQUIDO GROWTH LED", file: "LEDSTATION-100W-LIQUIDO-GROWTH-LED.pdf" },
-        { name: "LEDSTATION LINEAL GROWTH LED", file: "LEDSTATION-LINEAL-GROWTH-LED.pdf" },
-        { name: "Ledstation Zona 2 EESS GNC GROWTH LED", file: "Ledstation-Zona-2-EESS-GNC-GROWTH-LED.pdf" }
+        { name: "FAROLA GROWTH LED NEW2025", file: "FAROLA-GROWTH-LED-NEW2025.pdf" }
       ]
     },
     {
-      title: "Fichas Técnicas",
-      description: "Especificaciones técnicas detalladas de nuestros productos",
-      icon: <FileText className="h-6 w-6" />,
-      gradient: "from-gray-500 to-slate-400",
+      id: 4,
+      title: "SISTEMAS SOLARES",
+      subtitle: "Energía Renovable Autónoma",
+      description: "Sistemas de iluminación LED completamente autónomos alimentados por energía solar. Ideales para ubicaciones remotas o proyectos sustentables. Incluyen baterías de litio de larga duración y paneles solares de alta eficiencia.",
+      image: solares,
+      icon: <Sun className="h-8 w-8" />,
+      gradient: "from-yellow-600/80 to-orange-500/80",
+      specs: ["Autonomía: 5-10 días", "Panel: 80W-200W", "Batería litio", "Instalación sin cableado"],
+      applications: ["Zonas rurales", "Parques y plazas", "Rutas sin electrificación", "Proyectos sustentables"],
       catalogs: [
-        { name: "CAT 100W GROWTHLED FICHA TECNICA", file: "CAT-100W-GROWTHLED-FICHA-TECNICA-PDF.pdf" },
-        { name: "GROWTH LED Ficha Técnica PROYECTOR DEP HF", file: "GROWTH-LEDFicha-Tecnica-PROYECTOR-DEP-HF.pdf" }
+        { name: "EVEREST All in One SOLAR", file: "EVEREST-All-in-One-SOLAR.pdf" },
+        { name: "LUMINARIA SOLAR", file: "LUMINARIA-SOLAR.pdf" }
+      ]
+    },
+    {
+      id: 5,
+      title: "LINEALES INDUSTRIALES",
+      subtitle: "Iluminación Continua y Uniforme",
+      description: "Sistemas de iluminación lineal LED diseñados para proporcionar luz continua y uniforme en espacios industriales extensos. Perfectos para líneas de producción, pasillos largos y áreas que requieren iluminación específica sin sombras.",
+      image: lineales,
+      icon: <Activity className="h-8 w-8" />,
+      gradient: "from-purple-600/80 to-indigo-500/80",
+      specs: ["Longitudes: 0.6m - 2.4m", "Conectables en serie", "Difusor opalino", "Montaje versátil"],
+      applications: ["Líneas de producción", "Pasillos industriales", "Áreas de inspección", "Talleres especializados"],
+      catalogs: [
+        { name: "LEDSTATION LINEAL GROWTH LED", file: "LEDSTATION-LINEAL-GROWTH-LED.pdf" }
+      ]
+    },
+    {
+      id: 6,
+      title: "ANTIEXPLOSIÓN / ATEX",
+      subtitle: "Seguridad en Ambientes Peligrosos",
+      description: "Luminarias LED certificadas para ambientes con riesgo de explosión. Cumplen normativas ATEX y están diseñadas para operar de forma segura en presencia de gases, vapores o polvos combustibles en instalaciones petroquímicas y mineras.",
+      image: antiexplosion,
+      icon: <Shield className="h-8 w-8" />,
+      gradient: "from-red-600/80 to-pink-500/80",
+      specs: ["Certificación ATEX", "Zona 1 y Zona 2", "Carcasa reforzada", "Sellado hermético"],
+      applications: ["Plantas petroquímicas", "Refinerías", "Instalaciones mineras", "Ambientes explosivos"],
+      catalogs: [
+        { name: "Ledstation Zona 2 EESS GNC", file: "Ledstation-Zona-2-EESS-GNC-GROWTH-LED.pdf" },
+        { name: "LEDSTATION 100W LIQUIDO", file: "LEDSTATION-100W-LIQUIDO-GROWTH-LED.pdf" }
       ]
     }
   ];
 
   const handleDownload = (filename: string) => {
-    // Esta función se implementará cuando los archivos estén disponibles
     console.log(`Downloading: ${filename}`);
-    // Aquí irá la lógica para descargar el PDF
+    // Aquí irá la lógica para descargar el PDF desde public/catalogs/
+    const link = document.createElement('a');
+    link.href = `/catalogs/${filename}`;
+    link.download = filename;
+    link.click();
   };
+
+  const openModal = (categoryId: number) => {
+    setSelectedCategory(categoryId);
+  };
+
+  const closeModal = () => {
+    setSelectedCategory(null);
+  };
+
+  const selectedCategoryData = productCategories.find(cat => cat.id === selectedCategory);
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="pt-24 pb-16">
+      <main className="pt-24">
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-12">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Catálogos de Productos
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Descubre nuestra amplia gama de productos de iluminación LED. 
-              Descarga nuestros catálogos técnicos y encuentra la solución perfecta para tu proyecto.
-            </p>
+        <section className="relative py-24 bg-gradient-to-br from-primary/10 to-secondary/10">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-8">
+              <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+                Catálogos de Productos
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+                Explora nuestra línea completa de productos LED industriales. Cada categoría está diseñada 
+                para satisfacer las demandas más exigentes de la industria moderna y los grandes proyectos de infraestructura.
+              </p>
+            </div>
           </div>
         </section>
 
-        {/* Product Categories */}
-        <section className="container mx-auto px-4">
+        {/* Product Categories Grid */}
+        <section className="py-20 container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {productCategories.map((category, index) => (
-              <Card key={index} className="group hover:shadow-lg transition-all duration-300">
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${category.gradient} flex items-center justify-center text-white mb-4`}>
-                    {category.icon}
-                  </div>
-                  <CardTitle className="text-xl font-semibold">
-                    {category.title}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground">
-                    {category.description}
-                  </CardDescription>
-                </CardHeader>
-                
-                <CardContent className="space-y-3">
-                  {category.catalogs.map((catalog, catalogIndex) => (
-                    <div key={catalogIndex} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors">
-                      <div className="flex items-center space-x-3">
-                        <FileText className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm font-medium text-foreground truncate">
-                          {catalog.name}
-                        </span>
-                      </div>
-                      <Button
-                        size="sm"
-                        variant="ghost"
-                        onClick={() => handleDownload(catalog.file)}
-                        className="hover:bg-primary hover:text-primary-foreground"
-                      >
-                        <Download className="h-4 w-4" />
-                      </Button>
+              <Card 
+                key={category.id} 
+                className="group relative overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 cursor-pointer animate-fade-in bg-card border-border"
+                style={{ animationDelay: `${index * 150}ms` }}
+                onClick={() => openModal(category.id)}
+              >
+                {/* Background Image */}
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={category.image} 
+                    alt={category.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-t ${category.gradient} opacity-90`} />
+                  
+                  {/* Category Number */}
+                  <div className="absolute top-6 left-6">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center text-white font-bold text-2xl">
+                      {category.id.toString().padStart(2, '0')}
                     </div>
-                  ))}
+                  </div>
+
+                  {/* View Icon */}
+                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white">
+                      <Eye className="h-6 w-6" />
+                    </div>
+                  </div>
+
+                  {/* Icon */}
+                  <div className="absolute bottom-6 left-6">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center text-white">
+                      {category.icon}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Content */}
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {category.title}
+                  </h3>
+                  <p className="text-primary font-semibold mb-4">{category.subtitle}</p>
+                  <p className="text-muted-foreground leading-relaxed line-clamp-3">
+                    {category.description}
+                  </p>
+                  
+                  <div className="mt-6 flex items-center text-primary font-semibold">
+                    <span>Ver detalles</span>
+                    <Activity className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-2" />
+                  </div>
                 </CardContent>
               </Card>
             ))}
           </div>
         </section>
 
-        {/* Contact Section */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="text-center bg-muted/50 rounded-2xl p-8">
-            <h2 className="text-2xl font-bold text-foreground mb-4">
-              ¿Necesitas más información?
-            </h2>
-            <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-              Nuestro equipo técnico está disponible para ayudarte a elegir 
-              la mejor solución de iluminación LED para tu proyecto específico.
-            </p>
-            <Button size="lg" className="font-semibold">
-              Contactar Especialista
-            </Button>
+        {/* Modal */}
+        {selectedCategory && selectedCategoryData && (
+          <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <div className="bg-card rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto animate-scale-in">
+              {/* Header */}
+              <div className="relative h-64">
+                <img 
+                  src={selectedCategoryData.image} 
+                  alt={selectedCategoryData.title}
+                  className="w-full h-full object-cover"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${selectedCategoryData.gradient}`} />
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="absolute top-4 right-4 text-white hover:bg-white/20"
+                  onClick={closeModal}
+                >
+                  <X className="h-6 w-6" />
+                </Button>
+
+                <div className="absolute bottom-6 left-6 text-white">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                      {selectedCategoryData.icon}
+                    </div>
+                    <div>
+                      <h2 className="text-3xl font-bold">{selectedCategoryData.title}</h2>
+                      <p className="text-xl opacity-90">{selectedCategoryData.subtitle}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Content */}
+              <div className="p-8">
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Descripción</h3>
+                    <p className="text-muted-foreground leading-relaxed">{selectedCategoryData.description}</p>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Especificaciones</h3>
+                    <ul className="space-y-2">
+                      {selectedCategoryData.specs.map((spec, index) => (
+                        <li key={index} className="flex items-center text-muted-foreground">
+                          <div className="w-2 h-2 bg-primary rounded-full mr-3" />
+                          {spec}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Aplicaciones</h3>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {selectedCategoryData.applications.map((app, index) => (
+                      <div key={index} className="bg-muted/50 rounded-lg p-3 text-center">
+                        <span className="text-sm font-medium text-foreground">{app}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-bold text-foreground mb-4">Catálogos Disponibles</h3>
+                  <div className="grid gap-4">
+                    {selectedCategoryData.catalogs.map((catalog, index) => (
+                      <div key={index} className="flex items-center justify-between p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
+                        <div className="flex items-center space-x-3">
+                          <FileText className="h-5 w-5 text-primary" />
+                          <span className="font-medium text-foreground">{catalog.name}</span>
+                        </div>
+                        <Button
+                          onClick={() => handleDownload(catalog.file)}
+                          className="bg-primary hover:bg-primary/90"
+                        >
+                          <Download className="h-4 w-4 mr-2" />
+                          Descargar PDF
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </section>
+        )}
       </main>
+
+      <ContactSection />
     </div>
   );
 };
