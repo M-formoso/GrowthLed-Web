@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import ServicesSection from "@/components/ServicesSection";
+import Footer from "@/components/Footer";
 
 const Services = () => {
   return (
@@ -8,6 +9,7 @@ const Services = () => {
       <main className="pt-20">
         <ServicesSection />
       </main>
+      <Footer />
     </div>
   );
 };

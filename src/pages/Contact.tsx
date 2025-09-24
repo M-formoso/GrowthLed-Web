@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 import { MapPin, Phone, Mail, Clock, MessageSquare, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -208,6 +209,7 @@ const Contact = () => {
         {/* Original Contact Section */}
         <ContactSection />
       </main>
+      <Footer />
     </div>
   );
 };

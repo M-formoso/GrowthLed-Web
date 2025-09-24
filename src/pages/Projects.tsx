@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -269,6 +270,7 @@ const Projects = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

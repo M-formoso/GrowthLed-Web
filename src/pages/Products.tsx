@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Download, FileText, Factory, Zap, Lightbulb, Sun, Activity, Shield, Eye, X } from "lucide-react";
 import Header from "@/components/Header";
 import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/Footer";
 import campanasLed from "@/assets/productos/campanas-led.jpg";
 import proyectoresDeportivos from "@/assets/productos/proyectores-deportivos.jpg";
 import farolasUrbanas from "@/assets/productos/farolas-urbanas.jpg";
@@ -342,6 +343,7 @@ const Products = () => {
       </main>
 
       <ContactSection />
+      <Footer />
     </div>
   );
 };
