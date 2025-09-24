@@ -11,9 +11,9 @@ const Header = () => {
     { name: "INICIO", href: "/" },
     { name: "NOSOTROS", href: "/nosotros" },
     { name: "PRODUCTOS", href: "/productos" },
-    { name: "SERVICIOS", href: "#servicios" },
-    { name: "PROYECTOS", href: "#proyectos" },
-    { name: "CONTACTO", href: "#contacto" },
+    { name: "SERVICIOS", href: "/servicios" },
+    { name: "PROYECTOS", href: "/proyectos" },
+    { name: "CONTACTO", href: "/contacto" },
   ];
 
   return (
@@ -31,26 +31,15 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const isRoute = item.href.startsWith('/');
-              return isRoute ? (
-                <Link
-                  key={item.name}
-                  to={item.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {item.name}
-                </Link>
-              ) : (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {item.name}
-                </a>
-              );
-            })}
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
           </nav>
 
           {/* Contact Info */}
@@ -74,28 +63,16 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden absolute top-full left-0 w-full bg-background border-b border-border">
             <nav className="flex flex-col space-y-4 p-4">
-              {navItems.map((item) => {
-                const isRoute = item.href.startsWith('/');
-                return isRoute ? (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </Link>
-                ) : (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.name}
-                  </a>
-                );
-              })}
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
             </nav>
           </div>
         )}
