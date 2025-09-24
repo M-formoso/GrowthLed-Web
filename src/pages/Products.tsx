@@ -10,6 +10,7 @@ import farolasUrbanas from "@/assets/productos/farolas-urbanas.jpg";
 import solares from "@/assets/productos/solares.jpg";
 import lineales from "@/assets/productos/lineales.jpg";
 import antiexplosion from "@/assets/productos/antiexplosion.jpg";
+import productCatalogHero from "@/assets/product-catalog-hero.jpg";
 
 const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -137,16 +138,51 @@ const Products = () => {
       
       <main className="pt-24">
         {/* Hero Section */}
-        <section className="relative py-24 bg-gradient-to-br from-primary/10 to-secondary/10">
-          <div className="container mx-auto px-4">
+        <section className="relative py-32 overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img 
+              src={productCatalogHero} 
+              alt="Productos LED Industriales GROWTH LED"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/90 via-primary/70 to-secondary/80" />
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+          
+          {/* Content */}
+          <div className="relative container mx-auto px-4">
             <div className="text-center mb-8">
-              <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-6">
+              <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-white/10 backdrop-blur-sm rounded-full text-white">
+                <Factory className="h-6 w-6" />
+                <span className="font-semibold">Productos Industriales</span>
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
                 Catálogos de Productos
+                <span className="block text-3xl md:text-4xl font-normal mt-2 text-white/90">
+                  LED Industriales GROWTH LED
+                </span>
               </h1>
-              <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-                Explora nuestra línea completa de productos LED industriales. Cada categoría está diseñada 
-                para satisfacer las demandas más exigentes de la industria moderna y los grandes proyectos de infraestructura.
+              <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+                Explora nuestra línea completa de productos LED industriales de alta tecnología. Cada categoría está 
+                específicamente diseñada para satisfacer las demandas más exigentes de grandes complejos industriales, 
+                plantas de producción y proyectos de infraestructura crítica.
               </p>
+              
+              <div className="mt-8 flex flex-wrap justify-center gap-4 text-sm text-white/80">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span>+15 años de experiencia</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span>Certificaciones internacionales</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-white rounded-full"></div>
+                  <span>Proyectos en +20 países</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
