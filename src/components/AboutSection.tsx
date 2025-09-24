@@ -1,30 +1,32 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { CheckCircle, Users, Award, Zap } from "lucide-react";
+import { CheckCircle, Users, Award, Zap, Factory, Lightbulb, Shield } from "lucide-react";
+import industrialComplex from "@/assets/large-industrial-complex.jpg";
+import electricalInstallation from "@/assets/electrical-installation.jpg";
+import logisticsCenter from "@/assets/logistics-center.jpg";
 
 const AboutSection = () => {
   const stats = [
-    { number: "15+", label: "Años de Experiencia", icon: Award },
-    { number: "500+", label: "Proyectos Completados", icon: CheckCircle },
-    { number: "50+", label: "Especialistas", icon: Users },
-    { number: "24/7", label: "Soporte Técnico", icon: Zap },
+    { number: "2M+", label: "m² Iluminados Industriales", icon: Factory },
+    { number: "150+", label: "Plantas Industriales", icon: CheckCircle },
+    { number: "15", label: "Años Especializados", icon: Award },
+    { number: "24/7", label: "Servicio Industrial", icon: Shield },
   ];
 
-  const values = [
+  const industrialCapabilities = [
     {
-      title: "Innovación Tecnológica",
-      description: "Implementamos las últimas tecnologías LED y sistemas de control inteligente para maximizar la eficiencia energética.",
+      title: "Grandes Complejos Industriales",
+      description: "Especializados en iluminación LED para plantas de producción de más de 50,000 m², parques industriales y centros de manufactura con demandas energéticas críticas.",
+      image: industrialComplex,
     },
     {
-      title: "Experiencia Industrial",
-      description: "Más de 15 años especializándonos en proyectos de gran envergadura para parques industriales y centros logísticos.",
+      title: "Instalaciones Eléctricas de Media Tensión",
+      description: "Diseño e instalación de redes eléctricas industriales, subestaciones transformadoras y sistemas de distribución para grandes consumos energéticos.",
+      image: electricalInstallation,
     },
     {
-      title: "Calidad Certificada",
-      description: "Todos nuestros productos cumplen con las normativas internacionales más exigentes y cuentan con garantías extendidas.",
-    },
-    {
-      title: "Soluciones Integrales",
-      description: "Desde el diseño hasta la instalación y mantenimiento, ofrecemos un servicio completo llave en mano.",
+      title: "Centros Logísticos y Distribución",
+      description: "Soluciones integrales para almacenes automatizados, centros de distribución de gran altura y facilidades logísticas con operación 24/7.",
+      image: logisticsCenter,
     },
   ];
 
@@ -37,8 +39,8 @@ const AboutSection = () => {
             Nosotros
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            GROWTHLED es líder en Argentina en soluciones de iluminación LED industrial y redes eléctricas de media tensión. 
-            Transformamos espacios industriales con tecnología de vanguardia y eficiencia energética.
+            GROWTHLED es el especialista líder en Argentina para iluminación LED industrial de gran escala y redes eléctricas de media tensión. 
+            Transformamos complejos industriales de más de 50,000 m² con tecnología de vanguardia y máxima eficiencia energética.
           </p>
         </div>
 
@@ -59,48 +61,56 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
           <div>
             <h3 className="text-3xl font-bold text-foreground mb-6">
-              Nuestra Historia
+              Especialistas en Gran Industria
             </h3>
             <div className="space-y-4 text-muted-foreground">
               <p>
-                Fundada en 2008, GROWTHLED nació con la misión de revolucionar la iluminación industrial en Argentina. 
-                Comenzamos como pioneros en la tecnología LED cuando aún era emergente en el mercado local.
+                Desde 2008, GROWTHLED se ha consolidado como el líder indiscutido en iluminación LED para grandes complejos industriales en Argentina. 
+                Nuestro enfoque exclusivo en proyectos de gran envergadura nos ha posicionado como socios estratégicos de las principales industrias del país.
               </p>
               <p>
-                Hoy somos referentes en proyectos de gran escala, habiendo iluminado más de 2 millones de metros cuadrados 
-                en parques industriales, centros logísticos y complejos deportivos a lo largo del país.
+                Hemos transformado más de 2 millones de metros cuadrados en plantas de producción, parques industriales y centros logísticos, 
+                implementando soluciones que reducen hasta un 70% el consumo energético mientras mejoran significativamente la productividad.
               </p>
               <p>
-                Nuestro equipo multidisciplinario combina ingenieros eléctricos, especialistas en eficiencia energética 
-                y técnicos certificados para garantizar la máxima calidad en cada proyecto.
+                Nuestro equipo especializado incluye ingenieros en alta tensión, diseñadores de sistemas industriales 
+                y técnicos certificados en instalaciones críticas que operan bajo los más altos estándares de seguridad industrial.
               </p>
             </div>
           </div>
           <div className="relative">
             <div className="aspect-video rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
               <div className="text-center p-8">
-                <Zap className="w-16 h-16 text-primary mx-auto mb-4" />
-                <h4 className="text-2xl font-bold text-foreground mb-2">Desde 2008</h4>
-                <p className="text-muted-foreground">Iluminando el futuro de la industria argentina</p>
+                <Factory className="w-16 h-16 text-primary mx-auto mb-4" />
+                <h4 className="text-2xl font-bold text-foreground mb-2">Gran Industria</h4>
+                <p className="text-muted-foreground">Iluminando la industria argentina desde 2008</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Values Grid */}
+        {/* Industrial Capabilities */}
         <div>
           <h3 className="text-3xl font-bold text-foreground text-center mb-12">
-            Nuestros Valores
+            Nuestras Especialidades Industriales
           </h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            {values.map((value, index) => (
-              <Card key={index} className="bg-card border-border hover:shadow-brand-glow transition-all duration-300">
-                <CardContent className="p-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {industrialCapabilities.map((capability, index) => (
+              <Card key={index} className="bg-card border-border hover:shadow-brand-glow transition-all duration-300 overflow-hidden">
+                <div className="relative h-48">
+                  <img 
+                    src={capability.image} 
+                    alt={capability.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                </div>
+                <CardContent className="p-6">
                   <h4 className="text-xl font-semibold text-foreground mb-4">
-                    {value.title}
+                    {capability.title}
                   </h4>
                   <p className="text-muted-foreground leading-relaxed">
-                    {value.description}
+                    {capability.description}
                   </p>
                 </CardContent>
               </Card>
