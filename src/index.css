@@ -274,4 +274,202 @@ All colors MUST be HSL.
     break-inside: avoid;
     margin-bottom: 1.5rem;
   }
+
+  /* ReactBits-inspired Background Effects */
+  .aurora-effect {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      var(--aurora-color-1),
+      var(--aurora-color-2),
+      var(--aurora-color-3)
+    );
+    filter: blur(60px);
+    opacity: var(--aurora-blend);
+    animation: aurora-wave var(--aurora-speed) ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  @keyframes aurora-wave {
+    0%, 100% {
+      transform: rotate(0deg) scale(1) skewX(0deg);
+      border-radius: 50% 40% 60% 30%;
+    }
+    25% {
+      transform: rotate(90deg) scale(1.1) skewX(5deg);
+      border-radius: 30% 60% 40% 50%;
+    }
+    50% {
+      transform: rotate(180deg) scale(0.9) skewX(-5deg);
+      border-radius: 60% 30% 50% 40%;
+    }
+    75% {
+      transform: rotate(270deg) scale(1.05) skewX(3deg);
+      border-radius: 40% 50% 30% 60%;
+    }
+  }
+
+  .fluid-gradient {
+    position: absolute;
+    inset: -50%;
+    background: conic-gradient(
+      from 0deg,
+      var(--fluid-color-1),
+      var(--fluid-color-2),
+      var(--fluid-color-3),
+      var(--fluid-color-1)
+    );
+    filter: blur(var(--fluid-blur));
+    animation: fluid-rotate var(--fluid-speed) linear infinite;
+  }
+
+  @keyframes fluid-rotate {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(1.2);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+  }
+
+  .orb-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: var(--orb-size);
+    height: var(--orb-size);
+    background: radial-gradient(
+      circle at 30% 30%,
+      var(--orb-color),
+      transparent 70%
+    );
+    border-radius: 50%;
+    filter: blur(20px);
+    transform: translate(-50%, -50%);
+    animation: orb-float 8s ease-in-out infinite;
+    transition: all 0.3s ease;
+  }
+
+  .orb-effect-hover {
+    transform: translate(-50%, -50%) scale(var(--orb-hover-scale));
+    animation: orb-distort 2s ease-in-out infinite;
+  }
+
+  @keyframes orb-float {
+    0%, 100% {
+      transform: translate(-50%, -50%) translateY(0px);
+    }
+    50% {
+      transform: translate(-50%, -50%) translateY(-20px);
+    }
+  }
+
+  @keyframes orb-distort {
+    0%, 100% {
+      border-radius: 50%;
+    }
+    25% {
+      border-radius: 60% 40% 60% 40%;
+    }
+    50% {
+      border-radius: 40% 60% 40% 60%;
+    }
+    75% {
+      border-radius: 55% 45% 55% 45%;
+    }
+  }
+
+  .particle {
+    position: absolute;
+    left: var(--particle-x);
+    top: var(--particle-y);
+    width: var(--particle-size);
+    height: var(--particle-size);
+    background: var(--particle-color);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: particle-float var(--particle-duration) linear infinite;
+    animation-delay: var(--particle-delay);
+  }
+
+  @keyframes particle-float {
+    0% {
+      transform: translateY(0px) translateX(0px);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(20px);
+      opacity: 0;
+    }
+  }
+
+  .mesh-gradient {
+    position: absolute;
+    inset: -100%;
+    background: radial-gradient(
+        circle at 20% 50%,
+        var(--mesh-color-1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 20%,
+        var(--mesh-color-2) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 40% 80%,
+        var(--mesh-color-3) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 90% 70%,
+        var(--mesh-color-4) 0%,
+        transparent 50%
+      );
+    filter: blur(40px);
+    animation: mesh-morph var(--mesh-speed) ease-in-out infinite;
+  }
+
+  @keyframes mesh-morph {
+    0%, 100% {
+      transform: scale(1) rotate(0deg);
+    }
+    33% {
+      transform: scale(1.1) rotate(120deg);
+    }
+    66% {
+      transform: scale(0.9) rotate(240deg);
+    }
+  }
+
+  .dot-grid-pattern {
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(
+      circle at center,
+      var(--dot-color) var(--dot-size),
+      transparent var(--dot-size)
+    );
+    background-size: var(--dot-spacing) var(--dot-spacing);
+    animation: dot-pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes dot-pulse {
+    0%, 100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
 }

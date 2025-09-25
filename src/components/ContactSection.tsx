@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { AuroraBackground, FluidGradient } from "@/components/ui/reactbits-backgrounds";
 
 const ContactSection = () => {
   const clients = [
@@ -21,8 +22,13 @@ const ContactSection = () => {
   return (
     <>
       {/* Contact CTA Section */}
-      <section id="contacto" className="py-20 bg-card">
-        <div className="container mx-auto px-4">
+      <section id="contacto" className="relative py-20 overflow-hidden">
+        <AuroraBackground 
+          colorStops={["hsl(var(--primary))", "hsl(var(--primary-glow))", "hsl(var(--accent))"]}
+          speed={0.8}
+          blend={0.15}
+        />
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">¿Necesita asesoría?</h2>
             <p className="text-xl text-muted-foreground mb-8">
@@ -41,7 +47,7 @@ const ContactSection = () => {
             <h3 className="text-2xl font-bold text-center text-foreground mb-8">Confían en nosotros</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
               {clients.map((client, index) => (
-                <Card key={index} className="hover:scale-105 transition-transform bg-background border-border">
+                <Card key={index} className="hover:scale-105 transition-transform bg-background/80 backdrop-blur-sm border-border">
                   <CardContent className="p-4 flex items-center justify-center">
                     <img 
                       src={client.logo} 
