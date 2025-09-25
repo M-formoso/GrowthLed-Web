@@ -15,7 +15,7 @@ const Footer = () => {
               <img 
                 src="/src/assets/growthled-logo.jpeg" 
                 alt="GROWTHLED Logo" 
-                className="w-12 h-12 object-contain"
+                className="w-16 h-16 object-contain"
               />
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
