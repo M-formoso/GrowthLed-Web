@@ -133,7 +133,10 @@ const ModernProductsGrid = () => {
   };
 
   const handleDownloadPDF = (catalogUrl: string) => {
-    window.open(catalogUrl, '_blank');
+    console.log('Intentando abrir PDF:', catalogUrl);
+    const fullUrl = `/${catalogUrl}`;
+    console.log('URL completa:', fullUrl);
+    window.open(fullUrl, '_blank');
   };
 
   return (
@@ -208,7 +211,7 @@ const ModernProductsGrid = () => {
                 />
                 
                 {/* Overlay con gradiente */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-85 group-hover:opacity-75 transition-opacity duration-300`} />
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
                 
                 {/* Contenido */}
                 <CardContent className="relative z-10 p-6 h-full flex flex-col justify-between text-white">
@@ -272,6 +275,7 @@ const ModernProductsGrid = () => {
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm"
                       onClick={(e) => {
                         e.stopPropagation();
+                        console.log('Botón Ver clickeado para:', product.name);
                         handleViewProduct(product);
                       }}
                     >
@@ -284,6 +288,7 @@ const ModernProductsGrid = () => {
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm"
                       onClick={(e) => {
                         e.stopPropagation();
+                        console.log('Botón PDF clickeado para:', product.catalogUrl);
                         handleDownloadPDF(product.catalogUrl);
                       }}
                     >
