@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const About = () => {
   return (
@@ -10,6 +11,7 @@ const About = () => {
         <AboutSection />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };

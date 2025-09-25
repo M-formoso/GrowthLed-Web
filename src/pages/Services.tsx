@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import ServicesSection from "@/components/ServicesSection";
 import Footer from "@/components/Footer";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
 const Services = () => {
   return (
@@ -10,6 +11,7 @@ const Services = () => {
         <ServicesSection />
       </main>
       <Footer />
+      <FloatingWhatsApp />
     </div>
   );
 };
