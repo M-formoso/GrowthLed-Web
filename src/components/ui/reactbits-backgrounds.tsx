@@ -17,14 +17,37 @@ export const AuroraBackground = ({
 }: AuroraBackgroundProps) => {
   return (
     <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}>
+      {/* Main Aurora Layer */}
       <div 
-        className="aurora-effect"
+        className="aurora-layer-1"
         style={{
           "--aurora-color-1": colorStops[0],
           "--aurora-color-2": colorStops[1], 
           "--aurora-color-3": colorStops[2],
-          "--aurora-speed": `${30 / speed}s`,
+          "--aurora-speed": `${20 / speed}s`,
           "--aurora-blend": blend
+        } as React.CSSProperties}
+      />
+      {/* Secondary Aurora Layer */}
+      <div 
+        className="aurora-layer-2"
+        style={{
+          "--aurora-color-1": colorStops[1],
+          "--aurora-color-2": colorStops[2], 
+          "--aurora-color-3": colorStops[0],
+          "--aurora-speed": `${25 / speed}s`,
+          "--aurora-blend": blend * 0.6
+        } as React.CSSProperties}
+      />
+      {/* Tertiary Aurora Layer */}
+      <div 
+        className="aurora-layer-3"
+        style={{
+          "--aurora-color-1": colorStops[2],
+          "--aurora-color-2": colorStops[0], 
+          "--aurora-color-3": colorStops[1],
+          "--aurora-speed": `${15 / speed}s`,
+          "--aurora-blend": blend * 0.4
         } as React.CSSProperties}
       />
     </div>
