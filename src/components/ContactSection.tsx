@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { AuroraBackground, FluidGradient } from "@/components/ui/reactbits-backgrounds";
+import { HyperSpeed } from "@/components/ui/reactbits-backgrounds";
 
 const ContactSection = () => {
   const clients = [
@@ -22,11 +22,11 @@ const ContactSection = () => {
   return (
     <>
       {/* Contact CTA Section */}
-      <section id="contacto" className="relative py-20 overflow-hidden">
-        <AuroraBackground 
-          colorStops={["hsl(20, 91%, 58%)", "hsl(25, 85%, 65%)", "hsl(20, 91%, 58%)"]}
-          speed={0.5}
-          blend={0.2}
+      <section id="contacto" className="relative py-20 overflow-hidden bg-background">
+        <HyperSpeed 
+          lineCount={80}
+          speed={1.2}
+          colors={["hsl(20, 91%, 58%)", "hsl(25, 85%, 65%)", "#00ff88", "#0088ff"]}
         />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">

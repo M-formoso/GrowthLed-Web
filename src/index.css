@@ -454,6 +454,95 @@ All colors MUST be HSL.
     }
   }
 
+  /* Hyper Speed Effect */
+  .hyperspeed-line {
+    position: absolute;
+    left: var(--line-x);
+    top: var(--line-y);
+    width: var(--line-length);
+    height: 2px;
+    background: linear-gradient(
+      90deg, 
+      transparent, 
+      var(--line-color), 
+      transparent
+    );
+    transform-origin: left center;
+    transform: rotate(var(--line-angle));
+    opacity: var(--line-opacity);
+    animation: hyperspeed-move var(--line-speed) linear infinite;
+    animation-delay: var(--line-delay);
+  }
+
+  .hyperspeed-burst {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(
+      circle at center,
+      rgba(0, 255, 136, 0.3) 0%,
+      rgba(0, 136, 255, 0.2) 30%,
+      transparent 70%
+    );
+    animation: hyperspeed-pulse 2s ease-in-out infinite;
+  }
+
+  .hyperspeed-streaks {
+    position: absolute;
+    inset: 0;
+    background: conic-gradient(
+      from 0deg at center,
+      transparent 0deg,
+      rgba(255, 255, 0, 0.1) 10deg,
+      transparent 20deg,
+      rgba(0, 255, 136, 0.1) 30deg,
+      transparent 40deg,
+      rgba(255, 0, 136, 0.1) 50deg,
+      transparent 60deg
+    );
+    animation: hyperspeed-rotate 8s linear infinite;
+  }
+
+  @keyframes hyperspeed-move {
+    0% {
+      transform: rotate(var(--line-angle)) translateX(-100px);
+      opacity: 0;
+    }
+    10% {
+      opacity: var(--line-opacity);
+    }
+    90% {
+      opacity: var(--line-opacity);
+    }
+    100% {
+      transform: rotate(var(--line-angle)) translateX(calc(100vw + 100px));
+      opacity: 0;
+    }
+  }
+
+  @keyframes hyperspeed-pulse {
+    0%, 100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes hyperspeed-rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
   .particle {
     position: absolute;
     left: var(--particle-x);

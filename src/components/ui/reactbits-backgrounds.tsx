@@ -118,6 +118,58 @@ export const OrbBackground = ({
   );
 };
 
+// Hyper Speed Effect - Fast moving lines and particles
+interface HyperSpeedProps {
+  className?: string;
+  lineCount?: number;
+  speed?: number;
+  colors?: string[];
+}
+
+export const HyperSpeed = ({ 
+  className, 
+  lineCount = 80,
+  speed = 1,
+  colors = ["#00ff88", "#0088ff", "#ff0088", "#ffff00"]
+}: HyperSpeedProps) => {
+  const lines = Array.from({ length: lineCount }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    length: Math.random() * 200 + 50,
+    angle: Math.random() * 360,
+    speed: (Math.random() * 2 + 0.5) * speed,
+    color: colors[Math.floor(Math.random() * colors.length)],
+    opacity: Math.random() * 0.8 + 0.2,
+    delay: Math.random() * 5
+  }));
+
+  return (
+    <div className={cn("absolute inset-0 overflow-hidden", className)}>
+      {lines.map((line) => (
+        <div
+          key={line.id}
+          className="hyperspeed-line"
+          style={{
+            "--line-x": `${line.x}%`,
+            "--line-y": `${line.y}%`,
+            "--line-length": `${line.length}px`,
+            "--line-angle": `${line.angle}deg`,
+            "--line-speed": `${line.speed}s`,
+            "--line-color": line.color,
+            "--line-opacity": line.opacity,
+            "--line-delay": `${line.delay}s`
+          } as React.CSSProperties}
+        />
+      ))}
+      {/* Central burst effect */}
+      <div className="hyperspeed-burst" />
+      {/* Radial streaks */}
+      <div className="hyperspeed-streaks" />
+    </div>
+  );
+};
+
 // Particle Field - CSS-based particles
 interface ParticleFieldProps {
   className?: string;
