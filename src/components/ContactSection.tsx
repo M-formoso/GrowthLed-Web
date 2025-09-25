@@ -24,9 +24,9 @@ const ContactSection = () => {
       {/* Contact CTA Section */}
       <section id="contacto" className="relative py-20 overflow-hidden">
         <AuroraBackground 
-          colorStops={["hsl(var(--primary))", "hsl(var(--primary-glow))", "hsl(var(--accent))"]}
-          speed={0.8}
-          blend={0.15}
+          colorStops={["hsl(20, 91%, 58%)", "hsl(25, 85%, 65%)", "hsl(20, 91%, 58%)"]}
+          speed={0.5}
+          blend={0.2}
         />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">

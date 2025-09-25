@@ -19,6 +19,7 @@ All colors MUST be HSL.
 
     --primary: 20 91% 58%;
     --primary-foreground: 0 0% 98%;
+    --primary-glow: 25 85% 65%;
 
     --secondary: 215 15% 25%;
     --secondary-foreground: 0 0% 90%;
@@ -289,6 +290,7 @@ All colors MUST be HSL.
     opacity: var(--aurora-blend);
     animation: aurora-wave var(--aurora-speed) ease-in-out infinite;
     transform-origin: center;
+    z-index: 0;
   }
 
   @keyframes aurora-wave {

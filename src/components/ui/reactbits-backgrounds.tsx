@@ -11,12 +11,12 @@ interface AuroraBackgroundProps {
 
 export const AuroraBackground = ({ 
   className, 
-  colorStops = ["#3A29FF", "#FF94B4", "#FF3232"],
+  colorStops = ["#FF6B35", "#F7931E", "#FFD23F"],
   speed = 1,
-  blend = 0.5 
+  blend = 0.3 
 }: AuroraBackgroundProps) => {
   return (
-    <div className={cn("absolute inset-0 overflow-hidden", className)}>
+    <div className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}>
       <div 
         className="aurora-effect"
         style={{
