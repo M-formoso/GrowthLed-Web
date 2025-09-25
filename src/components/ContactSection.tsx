@@ -22,12 +22,7 @@ const ContactSection = () => {
   return (
     <>
       {/* Contact CTA Section */}
-      <section id="contacto" className="relative py-20 overflow-hidden bg-background">
-        <HyperSpeed 
-          lineCount={80}
-          speed={1.2}
-          colors={["hsl(20, 91%, 58%)", "hsl(25, 85%, 65%)", "#00ff88", "#0088ff"]}
-        />
+      <section id="contacto" className="relative py-20 bg-gradient-to-r from-primary/10 to-primary-glow/10">
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">¿Necesita asesoría?</h2>

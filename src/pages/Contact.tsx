@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
+import { HyperSpeed } from "@/components/ui/reactbits-backgrounds";
 import { MapPin, Phone, Mail, Clock, MessageSquare, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -63,14 +64,19 @@ const Contact = () => {
       <Header />
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="relative py-32 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10" />
+        <section className="relative py-32 overflow-hidden bg-background">
+          <HyperSpeed 
+            lineCount={100}
+            speed={1.5}
+            colors={["hsl(20, 91%, 58%)", "hsl(25, 85%, 65%)", "#00ff88", "#0088ff", "#ff0088"]}
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-background/80 z-10" />
           <div className="absolute inset-0 opacity-30">
             <div className="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-pulse" />
             <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }} />
           </div>
 
-          <div className="relative container mx-auto px-4 text-center">
+          <div className="relative container mx-auto px-4 text-center z-20">
             <div className="inline-flex items-center gap-3 mb-6 px-6 py-3 bg-primary/10 backdrop-blur-sm rounded-full text-primary animate-fade-in">
               <MessageSquare className="h-5 w-5" />
               <span className="font-semibold">Contacto Directo</span>
