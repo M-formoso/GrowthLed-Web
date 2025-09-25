@@ -11,13 +11,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <img 
                 src="/src/assets/growthled-logo.jpeg" 
                 alt="GROWTHLED Logo" 
-                className="w-8 h-8 object-contain"
+                className="w-12 h-12 object-contain"
               />
-              <h3 className="text-xl font-bold">GROWTHLED</h3>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
               Especialistas en iluminación LED industrial y soluciones energéticas. 
