@@ -2,10 +2,11 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AnimatedText } from "@/components/ui/animated-text";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
-import { Eye, Download, Star, ArrowRight, Zap } from "lucide-react";
+import { Eye, Download, Star, ArrowRight, Zap, X } from "lucide-react";
 
 // Importar imágenes de productos
 import campanasLed from "@/assets/productos/campanas-led.jpg";
@@ -18,6 +19,8 @@ import antiexplosion from "@/assets/productos/antiexplosion.jpg";
 const ModernProductsGrid = () => {
   const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categories = [
     { id: "all", name: "Todos los Productos", color: "from-primary to-primary/80" },
@@ -41,7 +44,7 @@ const ModernProductsGrid = () => {
       features: ["IP65", "5 años garantía", "Regulable"],
       gradient: "from-blue-600 to-cyan-500",
       position: "col-span-2 row-span-2",
-      catalogUrl: "/catalogos/B2GHB12CAMPANA LED GROWTHLED.pdf"
+      catalogUrl: "catalogos/B2GHB12CAMPANA LED GROWTHLED.pdf"
     },
     {
       id: 2,
@@ -56,7 +59,7 @@ const ModernProductsGrid = () => {
       features: ["Anti-deslumbramiento", "Control DMX"],
       gradient: "from-green-600 to-emerald-500",
       position: "col-span-1 row-span-1",
-      catalogUrl: "/catalogos/GROWTH LEDFicha Técnica - PROYECTOR DEP HF.pdf"
+      catalogUrl: "catalogos/GROWTH LEDFicha Técnica - PROYECTOR DEP HF.pdf"
     },
     {
       id: 3,
@@ -71,7 +74,7 @@ const ModernProductsGrid = () => {
       features: ["Fotocélula", "Diseño moderno"],
       gradient: "from-purple-600 to-pink-500",
       position: "col-span-1 row-span-1",
-      catalogUrl: "/catalogos/FAROLA GROWTH LED NEW2025.pdf"
+      catalogUrl: "catalogos/FAROLA GROWTH LED NEW2025.pdf"
     },
     {
       id: 4,
@@ -86,7 +89,7 @@ const ModernProductsGrid = () => {
       features: ["Conexión continua", "Múltiples acabados"],
       gradient: "from-indigo-600 to-blue-500",
       position: "col-span-1 row-span-2",
-      catalogUrl: "/catalogos/LEDSTATION LINEAL GROWTH LED..pdf"
+      catalogUrl: "catalogos/LEDSTATION LINEAL GROWTH LED..pdf"
     },
     {
       id: 5,
@@ -101,7 +104,7 @@ const ModernProductsGrid = () => {
       features: ["Batería LiFePO4", "Panel monocristalino"],
       gradient: "from-yellow-500 to-orange-500",
       position: "col-span-2 row-span-1",
-      catalogUrl: "/catalogos/EVEREST All in One  SOLAR_page-0001.pdf"
+      catalogUrl: "catalogos/EVEREST All in One  SOLAR_page-0001.pdf"
     },
     {
       id: 6,
@@ -116,13 +119,22 @@ const ModernProductsGrid = () => {
       features: ["ATEX/IECEx", "Acero inoxidable"],
       gradient: "from-red-600 to-orange-600",
       position: "col-span-1 row-span-1",
-      catalogUrl: "/catalogos/Ledstation Zona 2 EESS GNC GROWTH LED..pdf"
+      catalogUrl: "catalogos/Ledstation Zona 2 EESS GNC GROWTH LED..pdf"
     }
   ];
 
   const filteredProducts = selectedCategory === "all" 
     ? products 
     : products.filter(product => product.category === selectedCategory);
+
+  const handleViewProduct = (product: any) => {
+    setSelectedProduct(product);
+    setIsModalOpen(true);
+  };
+
+  const handleDownloadPDF = (catalogUrl: string) => {
+    window.open(catalogUrl, '_blank');
+  };
 
   return (
     <section className="relative py-24 bg-gradient-to-br from-background via-background/98 to-background overflow-hidden">
@@ -258,6 +270,10 @@ const ModernProductsGrid = () => {
                       size="sm" 
                       variant="secondary"
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleViewProduct(product);
+                      }}
                     >
                       <Eye size={14} className="mr-1" />
                       Ver
@@ -266,7 +282,10 @@ const ModernProductsGrid = () => {
                       size="sm" 
                       variant="secondary"
                       className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm"
-                      onClick={() => window.open(product.catalogUrl, '_blank')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDownloadPDF(product.catalogUrl);
+                      }}
                     >
                       <Download size={14} className="mr-1" />
                       PDF
@@ -298,6 +317,105 @@ const ModernProductsGrid = () => {
           </FloatingElement>
         </div>
       </div>
+
+      {/* Modal de detalles del producto */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          {selectedProduct && (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-2xl font-bold mb-4">
+                  {selectedProduct.name}
+                </DialogTitle>
+              </DialogHeader>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Imagen del producto */}
+                <div className="relative rounded-lg overflow-hidden">
+                  <img 
+                    src={selectedProduct.image} 
+                    alt={selectedProduct.name}
+                    className="w-full h-64 md:h-80 object-cover"
+                  />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${selectedProduct.gradient} opacity-20`} />
+                </div>
+
+                {/* Detalles del producto */}
+                <div className="space-y-6">
+                  {/* Rating */}
+                  <div className="flex items-center">
+                    <div className="flex mr-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star 
+                          key={i} 
+                          size={16} 
+                          className={`${i < Math.floor(selectedProduct.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm text-muted-foreground">({selectedProduct.rating})</span>
+                  </div>
+
+                  {/* Descripción */}
+                  <p className="text-muted-foreground">
+                    {selectedProduct.description}
+                  </p>
+
+                  {/* Especificaciones */}
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="text-sm text-muted-foreground">Potencia</div>
+                      <div className="font-semibold">{selectedProduct.power}</div>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="text-sm text-muted-foreground">Eficiencia</div>
+                      <div className="font-semibold">{selectedProduct.efficiency}</div>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="text-sm text-muted-foreground">Vida útil</div>
+                      <div className="font-semibold">{selectedProduct.lifespan}</div>
+                    </div>
+                    <div className="bg-muted/50 rounded-lg p-3">
+                      <div className="text-sm text-muted-foreground">Categoría</div>
+                      <div className="font-semibold capitalize">{selectedProduct.category}</div>
+                    </div>
+                  </div>
+
+                  {/* Características */}
+                  <div>
+                    <h4 className="font-semibold mb-3">Características</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProduct.features.map((feature: string, idx: number) => (
+                        <Badge key={idx} variant="secondary">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Botones de acción */}
+                  <div className="flex gap-3 pt-4">
+                    <Button 
+                      onClick={() => handleDownloadPDF(selectedProduct.catalogUrl)}
+                      className="flex-1"
+                    >
+                      <Download size={16} className="mr-2" />
+                      Descargar PDF
+                    </Button>
+                    <Button 
+                      variant="outline"
+                      onClick={() => setIsModalOpen(false)}
+                    >
+                      <X size={16} className="mr-2" />
+                      Cerrar
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
