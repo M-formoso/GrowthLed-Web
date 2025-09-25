@@ -192,118 +192,86 @@ const ModernProductsGrid = () => {
         </div>
 
         {/* Grid de productos con layout dinámico */}
-        <div className="grid grid-cols-4 gap-6 auto-rows-[250px] stagger-container">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredProducts.map((product) => (
-            <MagneticCard
-              key={product.id}
-              className={`${product.position} group`}
-              strength={0.15}
-            >
-              <Card 
-                className="h-full glass-card hover-lift overflow-hidden border-0 relative group"
-                onMouseEnter={() => setHoveredProduct(product.id)}
-                onMouseLeave={() => setHoveredProduct(null)}
-              >
-                {/* Background con imagen */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  style={{ backgroundImage: `url(${product.image})` }}
+            <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
+              {/* Imagen del producto */}
+              <div className="relative h-48">
+                <img 
+                  src={product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover"
                 />
-                
-                {/* Overlay con gradiente */}
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300" />
-                
-                {/* Contenido */}
-                <CardContent className="relative z-10 p-6 h-full flex flex-col justify-between text-white">
-                  <div>
-                    {/* Rating */}
-                    <div className="flex items-center mb-3">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            size={14} 
-                            className={`${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-white/40'}`} 
-                          />
-                        ))}
-                      </div>
-                      <span className="ml-2 text-sm text-white/80">{product.rating}</span>
-                    </div>
-
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-white transition-colors">
-                      {product.name}
-                    </h3>
-                    
-                    <p className="text-white/80 text-sm mb-4 line-clamp-3 group-hover:text-white/90 transition-colors">
-                      {product.description}
-                    </p>
-
-                    {/* Specs rápidas */}
-                    <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
-                      <div className="bg-white/10 rounded px-2 py-1 backdrop-blur-sm">
-                        <span className="text-white/70">Potencia:</span>
-                        <div className="font-semibold">{product.power}</div>
-                      </div>
-                      <div className="bg-white/10 rounded px-2 py-1 backdrop-blur-sm">
-                        <span className="text-white/70">Eficiencia:</span>
-                        <div className="font-semibold">{product.efficiency}</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-2 mb-4">
-                    {product.features.slice(0, 2).map((feature, idx) => (
-                      <Badge 
-                        key={idx}
-                        variant="secondary" 
-                        className="text-xs bg-white/20 text-white border-white/30 backdrop-blur-sm mr-1"
-                      >
-                        {feature}
-                      </Badge>
+              </div>
+              
+              {/* Contenido */}
+              <CardContent className="p-6">
+                {/* Rating */}
+                <div className="flex items-center mb-3">
+                  <div className="flex mr-2">
+                    {[...Array(5)].map((_, i) => (
+                      <Star 
+                        key={i} 
+                        size={14} 
+                        className={`${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                      />
                     ))}
                   </div>
+                  <span className="text-sm text-muted-foreground">{product.rating}</span>
+                </div>
 
-                  {/* Botones de acción */}
-                  <div className={`
-                    flex gap-2 transition-all duration-300 transform
-                    ${hoveredProduct === product.id ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}
-                  `}>
-                    <Button 
-                      size="sm" 
-                      variant="secondary"
-                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Botón Ver clickeado para:', product.name);
-                        handleViewProduct(product);
-                      }}
-                    >
-                      <Eye size={14} className="mr-1" />
-                      Ver
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="secondary"
-                      className="bg-white/20 text-white border-white/30 hover:bg-white/30 backdrop-blur-sm"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        console.log('Botón PDF clickeado para:', product.catalogUrl);
-                        handleDownloadPDF(product.catalogUrl);
-                      }}
-                    >
-                      <Download size={14} className="mr-1" />
-                      PDF
-                    </Button>
-                  </div>
+                <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{product.description}</p>
 
-                  {/* Hover indicator */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight size={20} className="text-white" />
+                {/* Specs */}
+                <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
+                  <div className="bg-muted rounded p-2">
+                    <span className="text-muted-foreground">Potencia:</span>
+                    <div className="font-semibold">{product.power}</div>
                   </div>
-                </CardContent>
-              </Card>
-            </MagneticCard>
+                  <div className="bg-muted rounded p-2">
+                    <span className="text-muted-foreground">Eficiencia:</span>
+                    <div className="font-semibold">{product.efficiency}</div>
+                  </div>
+                </div>
+
+                {/* Features */}
+                <div className="flex flex-wrap gap-1 mb-4">
+                  {product.features.slice(0, 2).map((feature, idx) => (
+                    <Badge key={idx} variant="secondary" className="text-xs">
+                      {feature}
+                    </Badge>
+                  ))}
+                </div>
+
+                {/* Botones */}
+                <div className="flex gap-2">
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={() => {
+                      console.log('Ver producto:', product.name);
+                      handleViewProduct(product);
+                    }}
+                    className="flex-1"
+                  >
+                    <Eye size={14} className="mr-1" />
+                    Ver
+                  </Button>
+                  <Button 
+                    size="sm" 
+                    onClick={() => {
+                      console.log('PDF:', product.catalogUrl);
+                      handleDownloadPDF(product.catalogUrl);
+                    }}
+                    className="flex-1"
+                  >
+                    <Download size={14} className="mr-1" />
+                    PDF
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
