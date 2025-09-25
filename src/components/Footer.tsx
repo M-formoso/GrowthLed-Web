@@ -12,9 +12,11 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-primary to-secondary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">GL</span>
-              </div>
+              <img 
+                src="/src/assets/growthled-logo.jpeg" 
+                alt="GROWTHLED Logo" 
+                className="w-8 h-8 object-contain"
+              />
               <h3 className="text-xl font-bold">GROWTHLED</h3>
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">

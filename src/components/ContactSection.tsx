@@ -71,47 +71,6 @@ const ContactSection = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-background border-t border-border py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Company Info */}
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-brand-gradient rounded-lg flex items-center justify-center">
-                  <div className="w-6 h-6 bg-foreground rounded-sm"></div>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground">GROWTHLED</h3>
-                  <p className="text-xs text-muted-foreground">We illuminate</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Contact Info */}
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-4">Contacto</h4>
-              <div className="space-y-2 text-muted-foreground">
-                <p>📧 info@growthled.com.ar</p>
-                <p>📍 Calle 26 n°1804, La PLata</p>
-                <p>📍 San Martín N°66, 5to.Piso Oficina 515 CABA</p>
-              </div>
-            </div>
-
-            {/* Business Hours */}
-            <div>
-              <h4 className="text-lg font-semibold text-foreground mb-4">Horarios</h4>
-              <p className="text-muted-foreground">Lunes a Viernes: 10:00 AM - 05:00 PM</p>
-            </div>
-          </div>
-
-          <div className="border-t border-border mt-8 pt-8 text-center">
-            <p className="text-muted-foreground">
-              © 2024 GROWTHLED. Todos los derechos reservados.
-            </p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 };
