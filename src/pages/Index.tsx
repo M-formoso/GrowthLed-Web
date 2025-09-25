@@ -1,7 +1,7 @@
 // Modern GROWTHLED website - Responsive LED lighting company site
 
 import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
+import ModernHeroSection from "@/components/ModernHeroSection";
 import NewsSection from "@/components/NewsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -12,7 +12,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <HeroSection />
+        <ModernHeroSection />
         <NewsSection />
         <ContactSection />
       </main>

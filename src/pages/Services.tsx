@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import ServicesSection from "@/components/ServicesSection";
+import ModernServicesSection from "@/components/ModernServicesSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 
@@ -8,7 +8,7 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
-        <ServicesSection />
+        <ModernServicesSection />
       </main>
       <Footer />
       <FloatingWhatsApp />
