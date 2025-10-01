@@ -18,7 +18,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter basename="/GrowthLed-Web">
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/nosotros" element={<About />} />
