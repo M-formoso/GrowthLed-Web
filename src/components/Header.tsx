@@ -43,20 +43,14 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* B2GROW Button */}
-          <a 
-            href="https://b2grow.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-md bg-primary hover:bg-primary/90 transition-colors"
-          >
+          {/* B2GROW Logo */}
+          <div className="hidden lg:block">
             <img 
               src={b2growLogo} 
               alt="B2GROW" 
-              className="h-6 w-6 object-contain"
+              className="h-10 w-auto object-contain transition-transform duration-300 hover:scale-110 cursor-pointer"
             />
-            <span className="text-sm font-semibold text-primary-foreground">pagina B2GROW</span>
-          </a>
+          </div>
 
           {/* Mobile Menu Button */}
           <Button
