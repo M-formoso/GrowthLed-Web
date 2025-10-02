@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import growthledLogo from "@/assets/growthled-logo.jpeg";
+import b2growLogo from "@/assets/b2grow-logo.png";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,11 +43,20 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Contact Info */}
-          <div className="hidden lg:block text-right">
-            <p className="text-sm text-muted-foreground">Lunes a Viernes</p>
-            <p className="text-sm font-semibold text-foreground">10:00 AM - 05:00 PM</p>
-          </div>
+          {/* B2GROW Button */}
+          <a 
+            href="https://b2grow.com" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hidden lg:flex items-center gap-2 px-4 py-2 rounded-md bg-primary hover:bg-primary/90 transition-colors"
+          >
+            <img 
+              src={b2growLogo} 
+              alt="B2GROW" 
+              className="h-6 w-6 object-contain"
+            />
+            <span className="text-sm font-semibold text-primary-foreground">pagina B2GROW</span>
+          </a>
 
           {/* Mobile Menu Button */}
           <Button
