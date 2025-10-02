@@ -20,7 +20,9 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: GITHUB_PAGES=true npm run build
+        env:
+          GITHUB_PAGES: true
 
       - name: Copy index.html to 404.html
         run: cp ./dist/index.html ./dist/404.html
