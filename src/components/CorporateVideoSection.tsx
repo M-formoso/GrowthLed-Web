@@ -1,10 +1,7 @@
-import { Play } from "lucide-react";
 import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 const CorporateVideoSection = () => {
-  const [isPlaying, setIsPlaying] = useState(false);
+  
 
   const services = [
     "Empresas e Industrias",
@@ -49,34 +46,21 @@ const CorporateVideoSection = () => {
           <div className="relative">
             <Card className="relative overflow-hidden rounded-3xl shadow-2xl hover-lift group">
               <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-glow/20 relative">
-                {!isPlaying ? (
-                  <>
-                    {/* Video Thumbnail Placeholder */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-background/60 flex items-center justify-center">
-                      <Button
-                        size="lg"
-                        onClick={() => setIsPlaying(true)}
-                        className="w-24 h-24 rounded-full bg-primary hover:bg-primary-glow shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:scale-110"
-                      >
-                        <Play className="w-10 h-10 ml-1" fill="currentColor" />
-                      </Button>
-                    </div>
-                    
-                    {/* Overlay text */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/90 to-transparent">
-                      <p className="text-white text-xl font-semibold">Video Corporativo</p>
-                      <p className="text-white/80 text-sm">Años de obra en instalaciones eléctricas industriales</p>
-                    </div>
-                  </>
-                ) : (
-                  <iframe
-                    className="w-full h-full"
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
-                    title="Video Corporativo GROWTHLED"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                )}
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src="https://cdn.pixabay.com/video/2023/05/30/164407-831164056_large.mp4" type="video/mp4" />
+                </video>
+                
+                {/* Overlay text */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/90 to-transparent">
+                  <p className="text-white text-xl font-semibold">Instalaciones Eléctricas Industriales</p>
+                  <p className="text-white/80 text-sm">Años de experiencia en obras de gran envergadura</p>
+                </div>
               </div>
             </Card>
 
