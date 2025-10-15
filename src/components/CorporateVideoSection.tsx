@@ -53,7 +53,7 @@ const CorporateVideoSection = () => {
                   loop
                   playsInline
                 >
-                  <source src="https://cdn.pixabay.com/video/2023/05/30/164407-831164056_large.mp4" type="video/mp4" />
+                  <source src="/videos/estacion-shell.mp4" type="video/mp4" />
                 </video>
                 
                 {/* Overlay text */}
