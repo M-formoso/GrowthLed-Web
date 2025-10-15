@@ -26,7 +26,7 @@ const Header = () => {
             <img 
               src={growthledLogo} 
               alt="GROWTHLED - We illuminate" 
-              className="h-12 w-auto object-contain"
+              className="h-12 w-auto object-contain opacity-0"
             />
           </Link>
 
