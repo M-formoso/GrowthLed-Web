@@ -51,9 +51,6 @@ const Footer = () => {
               <Link to="/servicios" className="block text-slate-300 hover:text-primary transition-colors text-sm">
                 Servicios
               </Link>
-              <Link to="/proyectos" className="block text-slate-300 hover:text-primary transition-colors text-sm">
-                Proyectos
-              </Link>
               <Link to="/contacto" className="block text-slate-300 hover:text-primary transition-colors text-sm">
                 Contacto
               </Link>
