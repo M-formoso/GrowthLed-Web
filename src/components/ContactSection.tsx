@@ -6,7 +6,7 @@ const ContactSection = () => {
   const clients = [
     { name: "YPF", logo: "/logos/ypf-logo.png" },
     { name: "Shell", logo: "/logos/shell-logo.png" },
-    { name: "Argentinos Juniors", logo: "/logos/argentinos-juniors-logo.png" },
+    { name: "Argentinos Juniors", logo: "/logos/argentinos-juniors.png" },
     { name: "Gulf", logo: "/logos/gulf-logo.png" },
     { name: "Puma Energy", logo: "/logos/puma-logo.png" },
   ];
