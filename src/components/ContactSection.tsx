@@ -4,13 +4,11 @@ import { HyperSpeed } from "@/components/ui/reactbits-backgrounds";
 
 const ContactSection = () => {
   const clients = [
-    { name: "Grupo Zingaro", logo: "https://via.placeholder.com/120x60/333/fff?text=Zingaro" },
-    { name: "TDA", logo: "https://via.placeholder.com/120x60/333/fff?text=TDA" },
-    { name: "AUBASA", logo: "https://via.placeholder.com/120x60/333/fff?text=AUBASA" },
-    { name: "Grupo Kopar", logo: "https://via.placeholder.com/120x60/333/fff?text=Kopar" },
-    { name: "Edelap", logo: "https://via.placeholder.com/120x60/333/fff?text=Edelap" },
-    { name: "Avatar", logo: "https://via.placeholder.com/120x60/333/fff?text=Avatar" },
-    { name: "Infraestructura Urbana", logo: "https://via.placeholder.com/120x60/333/fff?text=IU" },
+    { name: "YPF", logo: "/logos/ypf-logo.png" },
+    { name: "Shell", logo: "/logos/shell-logo.png" },
+    { name: "Argentinos Juniors", logo: "/logos/argentinos-juniors-logo.png" },
+    { name: "Gulf", logo: "/logos/gulf-logo.png" },
+    { name: "IPH", logo: "/logos/iph-logo.png" },
   ];
 
   const benefits = [
@@ -40,7 +38,7 @@ const ContactSection = () => {
           {/* Clients Section */}
           <div className="mb-16">
             <h3 className="text-2xl font-bold text-center text-foreground mb-8">Confían en nosotros</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 items-center">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-center">
               {clients.map((client, index) => (
                 <Card key={index} className="hover:scale-105 transition-transform bg-background/80 backdrop-blur-sm border-border">
                   <CardContent className="p-4 flex items-center justify-center">
