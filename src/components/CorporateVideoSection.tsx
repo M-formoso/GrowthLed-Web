@@ -21,7 +21,7 @@ const CorporateVideoSection = () => {
           {/* Left side - Content */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
                 Fabricamos luminarias world class con{" "}
                 <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
                   TECNOLOGÍAS LED
