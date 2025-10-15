@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import growthledLogo from "@/assets/growthled-logo-transparent.png";
+import growthledLogo from "@/assets/growthled-logo-new.png";
 import b2growLogo from "@/assets/b2grow-logo.png";
 
 const Header = () => {
@@ -26,7 +26,7 @@ const Header = () => {
             <img 
               src={growthledLogo} 
               alt="GROWTHLED - We illuminate" 
-              className="h-12 w-auto object-contain"
+              className="h-12 w-auto object-contain mix-blend-lighten dark:mix-blend-lighten"
             />
           </Link>
 
