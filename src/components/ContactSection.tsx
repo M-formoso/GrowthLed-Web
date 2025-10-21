@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { MagneticCard } from "@/components/ui/magnetic-card";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { ArrowRight } from "lucide-react";
 
@@ -59,22 +57,23 @@ const ContactSection = () => {
             >
               Confían en nosotros
             </ScrollReveal>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-center">
-              {clients.map((client, index) => (
-                <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <MagneticCard strength={0.15}>
-                    <Card className="hover:shadow-lg transition-all duration-300 bg-background/80 backdrop-blur-sm border-border hover:border-primary/50">
-                      <CardContent className="p-6 flex items-center justify-center">
-                        <img 
-                          src={client.logo} 
-                          alt={client.name}
-                          className="max-w-full h-12 object-contain opacity-70 hover:opacity-100 transition-opacity"
-                        />
-                      </CardContent>
-                    </Card>
-                  </MagneticCard>
-                </div>
-              ))}
+            
+            {/* Infinite Scroll Logos */}
+            <div className="relative overflow-hidden">
+              <div className="flex animate-infinite-scroll hover:pause">
+                {[...clients, ...clients, ...clients].map((client, index) => (
+                  <div 
+                    key={index} 
+                    className="flex-shrink-0 w-48 h-32 flex items-center justify-center mx-4"
+                  >
+                    <img 
+                      src={client.logo} 
+                      alt={client.name}
+                      className="max-w-full max-h-full object-contain grayscale hover:grayscale-0 transition-all duration-300 hover:scale-110"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>

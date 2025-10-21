@@ -632,4 +632,9 @@ All colors MUST be HSL.
       opacity: 0.8;
     }
   }
+
+  /* Infinite Scroll Animation */
+  .hover\:pause:hover {
+    animation-play-state: paused;
+  }
 }
