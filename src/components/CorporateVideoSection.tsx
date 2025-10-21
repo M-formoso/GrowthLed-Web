@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const CorporateVideoSection = () => {
   
@@ -21,7 +22,7 @@ const CorporateVideoSection = () => {
           {/* Video Section - Full Width */}
           <div className="relative max-w-6xl mx-auto">
             <Card className="relative overflow-hidden rounded-3xl shadow-2xl hover-lift group">
-              <div className="aspect-[21/9] bg-gradient-to-br from-primary/20 to-primary-glow/20 relative">
+              <div className="aspect-video bg-gradient-to-br from-primary/20 to-primary-glow/20 relative">
                 <video
                   className="w-full h-full object-cover"
                   autoPlay
@@ -51,16 +52,27 @@ const CorporateVideoSection = () => {
           {/* Content Section - Below Video */}
           <div className="max-w-4xl mx-auto space-y-8">
             <div className="space-y-4 text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                Fabricamos luminarias world class con{" "}
-                <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
-                  TECNOLOGÍAS LED
-                </span>
-              </h2>
+              <ScrollReveal
+                baseOpacity={0.2}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={6}
+                textClassName="text-3xl md:text-4xl lg:text-5xl font-bold"
+              >
+                Fabricamos luminarias world class con TECNOLOGÍAS LED
+              </ScrollReveal>
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-foreground text-center">ATENDEMOS A:</h3>
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={4}
+                textClassName="text-2xl font-semibold"
+              >
+                ATENDEMOS A:
+              </ScrollReveal>
               <div className="grid md:grid-cols-2 gap-x-8 gap-y-3">
                 {services.map((service, index) => (
                   <div key={index} className="flex items-start">
