@@ -277,50 +277,10 @@ const ModernProductsGrid = () => {
 
   return (
     <>
-      <section className="relative py-16 bg-gradient-to-br from-background via-background/98 to-muted/20 overflow-hidden">
+      <section className="relative py-8 bg-gradient-to-br from-background via-background/98 to-muted/20 overflow-hidden">
         <ParticleBackground particleCount={25} />
         
         <div className="container mx-auto px-4 relative z-10">
-          {/* Header */}
-          <div className="text-center mb-6">
-            <ScrollReveal
-              baseOpacity={0.2}
-              enableBlur={true}
-              baseRotation={2}
-              blurStrength={6}
-              containerClassName="mb-6"
-              textClassName="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent"
-            >
-              Catálogo Completo de Productos
-            </ScrollReveal>
-            
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              Descubrí nuestra amplia gama de productos LED diseñados para cada necesidad específica
-            </p>
-          </div>
-
-          {/* Filtros de categorías */}
-          <div className="flex flex-wrap justify-center gap-4 mb-8">
-            {categories.map((category, index) => (
-              <FloatingElement key={category.id} delay={600 + index * 100} amplitude={3}>
-                <MagneticCard strength={0.1}>
-                  <Button
-                    variant={selectedCategory === category.id ? "default" : "outline"}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`
-                      px-6 py-3 rounded-full transition-all duration-300
-                      ${selectedCategory === category.id 
-                        ? `bg-gradient-to-r ${category.color} text-white border-0 shadow-lg` 
-                        : 'glass-card hover:bg-primary/10'
-                      }
-                    `}
-                  >
-                    {category.name}
-                  </Button>
-                </MagneticCard>
-              </FloatingElement>
-            ))}
-          </div>
 
           {/* Productos por categoría con textos introductorios */}
           {selectedCategory === "all" ? (

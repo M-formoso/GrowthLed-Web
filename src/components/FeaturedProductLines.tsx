@@ -3,10 +3,11 @@ import { Card, CardContent } from "@/components/ui/card";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
-import { Sparkles, Palette, Star, ExternalLink, X } from "lucide-react";
+import { Sparkles, Palette, Star, ExternalLink, X, Factory, Zap, Shield, Sun } from "lucide-react";
 
 // Importar imágenes UFO DECO
 import ufoDeco1 from "@/assets/productos/ufo-deco-1.png";
@@ -25,6 +26,15 @@ import ufoIndustrial200wDetail from "@/assets/productos/ufo-industrial-200w-deta
 const FeaturedProductLines = () => {
   const [selectedProduct, setSelectedProduct] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const categories = [
+    { id: "all", name: "Todos los Productos", color: "from-primary to-primary/80" },
+    { id: "industrial", name: "Industrial", color: "from-blue-500 to-blue-600" },
+    { id: "deportivo", name: "Deportivo", color: "from-green-500 to-green-600" },
+    { id: "urbano", name: "Urbano", color: "from-purple-500 to-purple-600" },
+    { id: "solar", name: "Solar", color: "from-yellow-500 to-orange-500" }
+  ];
 
   const ufoProducts = [
     {
@@ -240,8 +250,51 @@ const FeaturedProductLines = () => {
 
   return (
     <>
-      <section className="py-16 bg-gradient-to-b from-muted/20 to-background">
-        <div className="container mx-auto px-4">
+      <section className="py-16 bg-gradient-to-b from-muted/20 to-background relative overflow-hidden">
+        <ParticleBackground particleCount={25} />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          {/* Header con título y descripción */}
+          <div className="text-center mb-12">
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={6}
+              containerClassName="mb-6"
+              textClassName="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent"
+            >
+              Catálogo Completo de Productos
+            </ScrollReveal>
+            
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto mb-8">
+              Descubrí nuestra amplia gama de productos LED diseñados para cada necesidad específica
+            </p>
+
+            {/* Filtros de categorías */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {categories.map((category, index) => (
+                <FloatingElement key={category.id} delay={600 + index * 100} amplitude={3}>
+                  <MagneticCard strength={0.1}>
+                    <Button
+                      variant={selectedCategory === category.id ? "default" : "outline"}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`
+                        px-6 py-3 rounded-full transition-all duration-300
+                        ${selectedCategory === category.id 
+                          ? `bg-gradient-to-r ${category.color} text-white border-0 shadow-lg` 
+                          : 'glass-card hover:bg-primary/10'
+                        }
+                      `}
+                    >
+                      {category.name}
+                    </Button>
+                  </MagneticCard>
+                </FloatingElement>
+              ))}
+            </div>
+          </div>
+
           {/* Línea UFO DECO */}
           {renderCategorySection("deco")}
 
