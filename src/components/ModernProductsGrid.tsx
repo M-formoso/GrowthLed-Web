@@ -293,32 +293,6 @@ const ModernProductsGrid = () => {
           ) : (
             renderCategorySection(selectedCategory)
           )}
-
-          {/* CTA final */}
-          <div className="text-center mt-16">
-            <ScrollReveal
-              baseOpacity={0.2}
-              enableBlur={true}
-              baseRotation={2}
-              blurStrength={5}
-              containerClassName="mb-6"
-              textClassName="text-xl md:text-2xl text-muted-foreground"
-            >
-              ¿Necesitás asesoramiento personalizado para tu proyecto?
-            </ScrollReveal>
-            <FloatingElement delay={1000} amplitude={8}>
-              <MagneticCard strength={0.2}>
-                <Button 
-                  size="lg" 
-                  className="px-8 py-6 text-lg font-semibold hover-lift group"
-                  onClick={() => window.location.href = '/contacto'}
-                >
-                  Contactar con un Especialista
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </MagneticCard>
-            </FloatingElement>
-          </div>
         </div>
       </section>
 
