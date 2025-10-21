@@ -3,10 +3,7 @@
 import Header from "@/components/Header";
 import ModernHeroSection from "@/components/ModernHeroSection";
 import CorporateVideoSection from "@/components/CorporateVideoSection";
-import FeaturedProductLines from "@/components/FeaturedProductLines";
-import ModernProductsGrid from "@/components/ModernProductsGrid";
-import ModernServicesSection from "@/components/ModernServicesSection";
-import AboutSection from "@/components/AboutSection";
+import NewsSection from "@/components/NewsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -18,27 +15,7 @@ const Index = () => {
       <main>
         <ModernHeroSection />
         <CorporateVideoSection />
-        
-        {/* Products Section */}
-        <section id="productos" className="py-20">
-          <FeaturedProductLines />
-          <ModernProductsGrid />
-        </section>
-        
-        {/* Services Section */}
-        <section id="servicios">
-          <ModernServicesSection />
-        </section>
-        
-        {/* About Section */}
-        <section id="nosotros">
-          <AboutSection />
-        </section>
-        
-        {/* Contact Section */}
-        <section id="contacto">
-          <ContactSection />
-        </section>
+        <ContactSection />
       </main>
       <Footer />
       <FloatingWhatsApp />
