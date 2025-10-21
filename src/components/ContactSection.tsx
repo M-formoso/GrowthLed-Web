@@ -61,7 +61,7 @@ const ContactSection = () => {
             {/* Infinite Scroll Logos */}
             <div className="relative overflow-hidden">
               <div className="flex animate-infinite-scroll hover:pause">
-                {[...clients, ...clients, ...clients].map((client, index) => (
+                {[...clients, ...clients].map((client, index) => (
                   <div 
                     key={index} 
                     className="flex-shrink-0 w-48 h-32 flex items-center justify-center mx-4"
