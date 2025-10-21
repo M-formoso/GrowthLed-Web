@@ -2,12 +2,10 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { AnimatedText } from "@/components/ui/animated-text";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Eye, Download, Star, ArrowRight, Zap, X } from "lucide-react";
+import { Download, Star, ArrowRight, Shield, Zap, Factory, Sun } from "lucide-react";
 
 // Importar imágenes de productos
 import campanasLed from "@/assets/productos/campanas-led.jpg";
@@ -18,10 +16,7 @@ import solares from "@/assets/productos/solares.jpg";
 import antiexplosion from "@/assets/productos/antiexplosion.jpg";
 
 const ModernProductsGrid = () => {
-  const [hoveredProduct, setHoveredProduct] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categories = [
     { id: "all", name: "Todos los Productos", color: "from-primary to-primary/80" },
@@ -124,20 +119,155 @@ const ModernProductsGrid = () => {
     }
   ];
 
+  const categoryIntros = {
+    industrial: {
+      icon: Factory,
+      title: "Soluciones Industriales de Alta Potencia",
+      description: "Nuestra línea industrial está diseñada para los entornos más exigentes. Con tecnología LED de última generación, ofrecemos iluminación eficiente y duradera para naves industriales, almacenes y espacios de gran altura."
+    },
+    deportivo: {
+      icon: Zap,
+      title: "Iluminación Deportiva Profesional",
+      description: "Proyectores de alto rendimiento diseñados específicamente para instalaciones deportivas. Control preciso del haz de luz y tecnología anti-deslumbramiento para garantizar la mejor experiencia tanto para atletas como para espectadores."
+    },
+    urbano: {
+      icon: Shield,
+      title: "Alumbrado Público Inteligente",
+      description: "Farolas LED que combinan eficiencia energética con diseño urbano moderno. Ideales para calles, parques y espacios públicos, con sistemas de control inteligente y larga vida útil."
+    },
+    solar: {
+      icon: Sun,
+      title: "Energía Solar Sostenible",
+      description: "Sistemas de iluminación completamente autónomos con paneles solares y baterías de última generación. La solución perfecta para zonas sin acceso a red eléctrica o proyectos sustentables."
+    }
+  };
+
   const filteredProducts = selectedCategory === "all" 
     ? products 
     : products.filter(product => product.category === selectedCategory);
 
-  const handleViewProduct = (product: any) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
+  const handleOpenPDF = (catalogUrl: string) => {
+    window.open(`/${catalogUrl}`, '_blank');
   };
 
-  const handleDownloadPDF = (catalogUrl: string) => {
-    console.log('Intentando abrir PDF:', catalogUrl);
-    const fullUrl = `/${catalogUrl}`;
-    console.log('URL completa:', fullUrl);
-    window.open(fullUrl, '_blank');
+  const getCategoryProducts = (category: string) => {
+    return products.filter(p => p.category === category);
+  };
+
+  const renderCategorySection = (categoryId: string) => {
+    if (categoryId === "all") return null;
+    
+    const categoryProducts = getCategoryProducts(categoryId);
+    if (categoryProducts.length === 0) return null;
+
+    const intro = categoryIntros[categoryId as keyof typeof categoryIntros];
+    const Icon = intro.icon;
+
+    return (
+      <div key={categoryId} className="mb-16">
+        {/* Intro Text */}
+        <div className="mb-12 max-w-4xl mx-auto">
+          <div className="flex items-center mb-4">
+            <Icon className="mr-3 text-primary" size={32} />
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={6}
+              textClassName="text-2xl md:text-3xl font-bold"
+            >
+              {intro.title}
+            </ScrollReveal>
+          </div>
+          <ScrollReveal
+            baseOpacity={0.3}
+            enableBlur={true}
+            baseRotation={1}
+            blurStrength={4}
+            textClassName="text-lg text-muted-foreground"
+          >
+            {intro.description}
+          </ScrollReveal>
+        </div>
+
+        {/* Products Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {categoryProducts.map((product, index) => (
+            <FloatingElement key={product.id} delay={index * 100} amplitude={5}>
+              <MagneticCard strength={0.15}>
+                <Card 
+                  className="overflow-hidden hover:shadow-2xl transition-all duration-300 cursor-pointer group"
+                  onClick={() => handleOpenPDF(product.catalogUrl)}
+                >
+                  {/* Imagen del producto */}
+                  <div className="relative h-56 overflow-hidden">
+                    <img 
+                      src={product.image}
+                      alt={product.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
+                    
+                    {/* Overlay con botón */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <Button size="lg" className="gap-2">
+                        <Download size={20} />
+                        Ver Catálogo PDF
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  {/* Contenido */}
+                  <CardContent className="p-6">
+                    {/* Rating */}
+                    <div className="flex items-center mb-3">
+                      <div className="flex mr-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            size={14} 
+                            className={`${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
+                          />
+                        ))}
+                      </div>
+                      <span className="text-sm text-muted-foreground">{product.rating}</span>
+                    </div>
+
+                    <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                      {product.description}
+                    </p>
+
+                    {/* Specs */}
+                    <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
+                      <div className="bg-muted/50 rounded p-2">
+                        <span className="text-muted-foreground">Potencia:</span>
+                        <div className="font-semibold">{product.power}</div>
+                      </div>
+                      <div className="bg-muted/50 rounded p-2">
+                        <span className="text-muted-foreground">Eficiencia:</span>
+                        <div className="font-semibold">{product.efficiency}</div>
+                      </div>
+                    </div>
+
+                    {/* Features */}
+                    <div className="flex flex-wrap gap-1">
+                      {product.features.slice(0, 3).map((feature, idx) => (
+                        <Badge key={idx} variant="secondary" className="text-xs">
+                          {feature}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </MagneticCard>
+            </FloatingElement>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -186,204 +316,44 @@ const ModernProductsGrid = () => {
           ))}
         </div>
 
-        {/* Grid de productos con layout dinámico */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProducts.map((product) => (
-            <Card key={product.id} className="overflow-hidden hover:shadow-lg transition-shadow">
-              {/* Imagen del producto */}
-              <div className="relative h-48">
-                <img 
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              
-              {/* Contenido */}
-              <CardContent className="p-6">
-                {/* Rating */}
-                <div className="flex items-center mb-3">
-                  <div className="flex mr-2">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        size={14} 
-                        className={`${i < Math.floor(product.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-muted-foreground">{product.rating}</span>
-                </div>
-
-                <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-                <p className="text-muted-foreground text-sm mb-4">{product.description}</p>
-
-                {/* Specs */}
-                <div className="grid grid-cols-2 gap-2 mb-4 text-xs">
-                  <div className="bg-muted rounded p-2">
-                    <span className="text-muted-foreground">Potencia:</span>
-                    <div className="font-semibold">{product.power}</div>
-                  </div>
-                  <div className="bg-muted rounded p-2">
-                    <span className="text-muted-foreground">Eficiencia:</span>
-                    <div className="font-semibold">{product.efficiency}</div>
-                  </div>
-                </div>
-
-                {/* Features */}
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {product.features.slice(0, 2).map((feature, idx) => (
-                    <Badge key={idx} variant="secondary" className="text-xs">
-                      {feature}
-                    </Badge>
-                  ))}
-                </div>
-
-                {/* Botones */}
-                <div className="flex gap-2">
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    onClick={() => {
-                      console.log('Ver producto:', product.name);
-                      handleViewProduct(product);
-                    }}
-                    className="flex-1"
-                  >
-                    <Eye size={14} className="mr-1" />
-                    Ver
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    onClick={() => {
-                      console.log('PDF:', product.catalogUrl);
-                      handleDownloadPDF(product.catalogUrl);
-                    }}
-                    className="flex-1"
-                  >
-                    <Download size={14} className="mr-1" />
-                    PDF
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        {/* Productos por categoría con textos introductorios */}
+        {selectedCategory === "all" ? (
+          <>
+            {renderCategorySection("industrial")}
+            {renderCategorySection("deportivo")}
+            {renderCategorySection("urbano")}
+            {renderCategorySection("solar")}
+          </>
+        ) : (
+          renderCategorySection(selectedCategory)
+        )}
 
         {/* CTA final */}
         <div className="text-center mt-16">
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={5}
+            containerClassName="mb-6"
+            textClassName="text-xl md:text-2xl text-muted-foreground"
+          >
+            ¿Necesitás asesoramiento personalizado para tu proyecto?
+          </ScrollReveal>
           <FloatingElement delay={1000} amplitude={8}>
             <MagneticCard strength={0.2}>
               <Button 
                 size="lg" 
                 className="px-8 py-6 text-lg font-semibold hover-lift group"
+                onClick={() => window.location.href = '/contacto'}
               >
-                Ver Catálogo Completo
+                Contactar con un Especialista
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </MagneticCard>
           </FloatingElement>
         </div>
       </div>
-
-      {/* Modal de detalles del producto */}
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          {selectedProduct && (
-            <>
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold mb-4">
-                  {selectedProduct.name}
-                </DialogTitle>
-              </DialogHeader>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                {/* Imagen del producto */}
-                <div className="relative rounded-lg overflow-hidden">
-                  <img 
-                    src={selectedProduct.image} 
-                    alt={selectedProduct.name}
-                    className="w-full h-64 md:h-80 object-cover"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${selectedProduct.gradient} opacity-20`} />
-                </div>
-
-                {/* Detalles del producto */}
-                <div className="space-y-6">
-                  {/* Rating */}
-                  <div className="flex items-center">
-                    <div className="flex mr-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          size={16} 
-                          className={`${i < Math.floor(selectedProduct.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                    </div>
-                    <span className="text-sm text-muted-foreground">({selectedProduct.rating})</span>
-                  </div>
-
-                  {/* Descripción */}
-                  <p className="text-muted-foreground">
-                    {selectedProduct.description}
-                  </p>
-
-                  {/* Especificaciones */}
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-muted/50 rounded-lg p-3">
-                      <div className="text-sm text-muted-foreground">Potencia</div>
-                      <div className="font-semibold">{selectedProduct.power}</div>
-                    </div>
-                    <div className="bg-muted/50 rounded-lg p-3">
-                      <div className="text-sm text-muted-foreground">Eficiencia</div>
-                      <div className="font-semibold">{selectedProduct.efficiency}</div>
-                    </div>
-                    <div className="bg-muted/50 rounded-lg p-3">
-                      <div className="text-sm text-muted-foreground">Vida útil</div>
-                      <div className="font-semibold">{selectedProduct.lifespan}</div>
-                    </div>
-                    <div className="bg-muted/50 rounded-lg p-3">
-                      <div className="text-sm text-muted-foreground">Categoría</div>
-                      <div className="font-semibold capitalize">{selectedProduct.category}</div>
-                    </div>
-                  </div>
-
-                  {/* Características */}
-                  <div>
-                    <h4 className="font-semibold mb-3">Características</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProduct.features.map((feature: string, idx: number) => (
-                        <Badge key={idx} variant="secondary">
-                          {feature}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Botones de acción */}
-                  <div className="flex gap-3 pt-4">
-                    <Button 
-                      onClick={() => handleDownloadPDF(selectedProduct.catalogUrl)}
-                      className="flex-1"
-                    >
-                      <Download size={16} className="mr-2" />
-                      Descargar PDF
-                    </Button>
-                    <Button 
-                      variant="outline"
-                      onClick={() => setIsModalOpen(false)}
-                    >
-                      <X size={16} className="mr-2" />
-                      Cerrar
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
