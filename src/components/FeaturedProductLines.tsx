@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Sparkles, Palette, Star, ExternalLink } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Sparkles, Palette, Star, ExternalLink, X } from "lucide-react";
 
 // Importar imágenes UFO DECO
 import ufoDeco1 from "@/assets/productos/ufo-deco-1.png";
@@ -20,6 +23,8 @@ import ufoIndustrial150wDetail2 from "@/assets/productos/ufo-industrial-150w-det
 import ufoIndustrial200wDetail from "@/assets/productos/ufo-industrial-200w-detail.png";
 
 const FeaturedProductLines = () => {
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ufoProducts = [
     {
@@ -119,16 +124,8 @@ const FeaturedProductLines = () => {
   };
 
   const handleProductClick = (product: any) => {
-    // Si tiene una sola imagen, abrirla directamente
-    if (product.images.length === 1) {
-      window.open(product.images[0], '_blank');
-    } else {
-      // Si tiene múltiples imágenes, abrir la primera en una nueva pestaña
-      // El usuario puede navegar desde ahí
-      product.images.forEach((img: string) => {
-        window.open(img, '_blank');
-      });
-    }
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
   const renderCategorySection = (category: "deco" | "industrial") => {
@@ -253,6 +250,71 @@ const FeaturedProductLines = () => {
         </div>
       </section>
 
+      {/* Modal de producto */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">{selectedProduct?.name}</DialogTitle>
+          </DialogHeader>
+          
+          {selectedProduct && (
+            <div className="space-y-6">
+              {/* Descripción */}
+              <p className="text-muted-foreground">{selectedProduct.description}</p>
+
+              {/* Especificaciones */}
+              <div className="grid grid-cols-3 gap-4">
+                {selectedProduct.specs?.map((spec: any, idx: number) => (
+                  <div key={idx} className="bg-muted/50 rounded-lg p-4">
+                    <span className="text-sm text-muted-foreground">{spec.label}</span>
+                    <div className="text-lg font-semibold">{spec.value}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Features */}
+              <div>
+                <h3 className="font-semibold mb-3">Características</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProduct.features?.map((feature: string, idx: number) => (
+                    <Badge key={idx} variant="secondary" className="text-sm">
+                      {feature}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Carousel de imágenes */}
+              {selectedProduct.images && selectedProduct.images.length > 0 && (
+                <div>
+                  <h3 className="font-semibold mb-3">Galería de Imágenes</h3>
+                  <Carousel className="w-full">
+                    <CarouselContent>
+                      {selectedProduct.images.map((image: string, idx: number) => (
+                        <CarouselItem key={idx}>
+                          <div className="rounded-lg overflow-hidden border bg-muted/20">
+                            <img 
+                              src={image}
+                              alt={`${selectedProduct.name} - ${idx + 1}`}
+                              className="w-full h-auto object-contain max-h-[600px] mx-auto"
+                            />
+                          </div>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    {selectedProduct.images.length > 1 && (
+                      <>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                      </>
+                    )}
+                  </Carousel>
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };

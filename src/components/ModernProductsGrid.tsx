@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Star, ArrowRight, Shield, Zap, Factory, Sun, ExternalLink } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Star, ArrowRight, Shield, Zap, Factory, Sun, ExternalLink, X } from "lucide-react";
 
 // Importar imágenes de productos
 import campanasLed from "@/assets/productos/campanas-led.jpg";
@@ -17,6 +19,8 @@ import antiexplosion from "@/assets/productos/antiexplosion.jpg";
 
 const ModernProductsGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categories = [
     { id: "all", name: "Todos los Productos", color: "from-primary to-primary/80" },
@@ -147,8 +151,8 @@ const ModernProductsGrid = () => {
     : products.filter(product => product.category === selectedCategory);
 
   const handleProductClick = (product: any) => {
-    // Abrir el PDF directamente en una nueva pestaña
-    window.open(`/${product.catalogUrl}`, '_blank');
+    setSelectedProduct(product);
+    setIsModalOpen(true);
   };
 
   const getCategoryProducts = (category: string) => {
@@ -278,7 +282,7 @@ const ModernProductsGrid = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           {/* Header */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-6">
             <ScrollReveal
               baseOpacity={0.2}
               enableBlur={true}
@@ -296,7 +300,7 @@ const ModernProductsGrid = () => {
           </div>
 
           {/* Filtros de categorías */}
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
             {categories.map((category, index) => (
               <FloatingElement key={category.id} delay={600 + index * 100} amplitude={3}>
                 <MagneticCard strength={0.1}>
@@ -358,6 +362,72 @@ const ModernProductsGrid = () => {
         </div>
       </section>
 
+      {/* Modal de producto */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="max-w-6xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">{selectedProduct?.name}</DialogTitle>
+          </DialogHeader>
+          
+          {selectedProduct && (
+            <div className="space-y-6">
+              {/* Descripción */}
+              <p className="text-muted-foreground">{selectedProduct.description}</p>
+
+              {/* Especificaciones */}
+              <div className="grid grid-cols-3 gap-4">
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <span className="text-sm text-muted-foreground">Potencia</span>
+                  <div className="text-lg font-semibold">{selectedProduct.power}</div>
+                </div>
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <span className="text-sm text-muted-foreground">Eficiencia</span>
+                  <div className="text-lg font-semibold">{selectedProduct.efficiency}</div>
+                </div>
+                <div className="bg-muted/50 rounded-lg p-4">
+                  <span className="text-sm text-muted-foreground">Vida Útil</span>
+                  <div className="text-lg font-semibold">{selectedProduct.lifespan}</div>
+                </div>
+              </div>
+
+              {/* Features */}
+              <div>
+                <h3 className="font-semibold mb-3">Características</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProduct.features?.map((feature: string, idx: number) => (
+                    <Badge key={idx} variant="secondary" className="text-sm">
+                      {feature}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              {/* Imagen del producto */}
+              <div className="rounded-lg overflow-hidden border">
+                <img 
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name}
+                  className="w-full h-auto object-contain"
+                />
+              </div>
+
+              {/* PDF Embebido */}
+              {selectedProduct.catalogUrl && (
+                <div>
+                  <h3 className="font-semibold mb-3">Catálogo Técnico</h3>
+                  <div className="border rounded-lg overflow-hidden" style={{ height: '600px' }}>
+                    <iframe
+                      src={`/${selectedProduct.catalogUrl}`}
+                      className="w-full h-full"
+                      title={`Catálogo ${selectedProduct.name}`}
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
