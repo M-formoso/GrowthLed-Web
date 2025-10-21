@@ -10,7 +10,8 @@ import {
   CarouselPrevious 
 } from "@/components/ui/carousel";
 import { AnimatedText } from "@/components/ui/animated-text";
-import { Sparkles, ChevronRight } from "lucide-react";
+import ScrollReveal from "@/components/ui/ScrollReveal";
+import { Sparkles, ChevronRight, Zap, Shield, Thermometer } from "lucide-react";
 
 // Importar imágenes UFO DECO
 import ufoDeco1 from "@/assets/productos/ufo-deco-1.png";
@@ -42,12 +43,13 @@ const FeaturedProductLines = () => {
         "Potencia seleccionable: alta-media-baja",
         "Ángulo dinámico: 60-90-120°",
         "Color seleccionable: blanco cálido, neutro o frío"
-      ]
+      ],
+      specs: undefined
     },
     industrial: {
       name: "UFO INDUSTRIAL",
-      subtitle: "Potencia y durabilidad para grandes espacios",
-      description: "Luminarias industriales de alto rendimiento diseñadas para naves, depósitos y espacios que requieren máxima iluminación y resistencia.",
+      subtitle: "Versatilidad total en potencia y eficiencia",
+      description: "Luminarias LED de alto rendimiento con eficiencia superior a 160Lm/W. Diseñadas para naves industriales, depósitos y espacios que requieren máxima iluminación. Sistema de potencia seleccionable (High/Mid/Low) y temperatura de color ajustable.",
       gradient: "from-blue-600 via-cyan-500 to-teal-500",
       images: [
         ufoIndustrial100w, 
@@ -58,11 +60,16 @@ const FeaturedProductLines = () => {
         ufoIndustrial200wDetail
       ],
       features: [
-        "Potencias disponibles: 100W, 150W, 200W",
-        "Alta eficiencia energética",
-        "Diseño robusto y duradero",
-        "Ideal para grandes alturas",
-        "Protección IP65"
+        "Potencias: 100W (16,000Lm), 150W (24,000Lm), 200W (32,000Lm)",
+        "Eficiencia: 140-160Lm/W con LEDs Lumileds/Samsung",
+        "Protección IP65 e IK10 con disipador de alta performance",
+        "3 ángulos en una luminaria: 60°/90°/120° seleccionables",
+        "CCT ajustable: 3000K/5500K/6500K - Garantía 5 años"
+      ],
+      specs: [
+        { icon: Zap, label: "160Lm/W", description: "Eficiencia Superior" },
+        { icon: Shield, label: "IP65/IK10", description: "Máxima Protección" },
+        { icon: Thermometer, label: "-30°C~+45°C", description: "Amplio Rango" }
       ]
     }
   };
@@ -160,10 +167,28 @@ const FeaturedProductLines = () => {
           {/* Información del producto */}
           <div className="space-y-6">
             <div>
-              <h3 className="text-3xl font-bold mb-2">{currentLine.name}</h3>
-              <p className="text-xl text-muted-foreground mb-4">
+              <ScrollReveal
+                baseOpacity={0.2}
+                enableBlur={true}
+                baseRotation={2}
+                blurStrength={6}
+                containerClassName="mb-4"
+                textClassName="text-3xl font-bold"
+              >
+                {currentLine.name}
+              </ScrollReveal>
+              
+              <ScrollReveal
+                baseOpacity={0.3}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={4}
+                containerClassName="mb-4"
+                textClassName="text-xl text-muted-foreground"
+              >
                 {currentLine.subtitle}
-              </p>
+              </ScrollReveal>
+              
               <p className="text-base leading-relaxed">
                 {currentLine.description}
               </p>
@@ -184,6 +209,22 @@ const FeaturedProductLines = () => {
                 ))}
               </ul>
             </div>
+
+            {/* Specs adicionales para Industrial */}
+            {activeTab === "industrial" && currentLine.specs && (
+              <div className="grid grid-cols-3 gap-4 pt-4 border-t">
+                {currentLine.specs.map((spec, index) => {
+                  const IconComponent = spec.icon;
+                  return (
+                    <div key={index} className="text-center p-4 rounded-lg bg-muted/50">
+                      <IconComponent className="w-8 h-8 mx-auto mb-2 text-primary" />
+                      <div className="font-bold text-lg">{spec.label}</div>
+                      <div className="text-xs text-muted-foreground">{spec.description}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
 
             {/* CTA */}
             <div className="pt-4">
