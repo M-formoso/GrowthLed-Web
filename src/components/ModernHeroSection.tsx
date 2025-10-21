@@ -5,6 +5,8 @@ import { MagneticCard } from "@/components/ui/magnetic-card";
 import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
 import { ChevronLeft, ChevronRight, ChevronDown, Zap, Award, Users } from "lucide-react";
 import heroBackground from "@/assets/hero-background.jpg";
+import heroSustainable from "@/assets/hero-sustainable.jpg";
+import heroIndustrial from "@/assets/hero-industrial.jpg";
 
 const ModernHeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -14,17 +16,20 @@ const ModernHeroSection = () => {
     {
       title: "Potenciá tu energía",
       subtitle: "con tecnología LED de vanguardia",
-      description: "Transformamos espacios con soluciones de iluminación inteligente y eficiente"
+      description: "Transformamos espacios con soluciones de iluminación inteligente y eficiente",
+      backgroundImage: heroBackground
     },
     {
       title: "Innovación Energética",
       subtitle: "para un futuro sostenible",
-      description: "Lideramos la revolución LED con productos que combinan diseño y eficiencia"
+      description: "Lideramos la revolución LED con productos que combinan diseño y eficiencia",
+      backgroundImage: heroSustainable
     },
     {
       title: "Iluminación Profesional",
       subtitle: "adaptada a tus necesidades",
-      description: "Desde grandes industrias hasta proyectos residenciales, tenemos la solución perfecta"
+      description: "Desde grandes industrias hasta proyectos residenciales, tenemos la solución perfecta",
+      backgroundImage: heroIndustrial
     }
   ];
 
@@ -59,9 +64,9 @@ const ModernHeroSection = () => {
     >
       {/* Background dinámico */}
       <div 
-        className="absolute inset-0 bg-cover bg-center transition-transform duration-700"
+        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
         style={{ 
-          backgroundImage: `url(${heroBackground})`,
+          backgroundImage: `url(${slides[currentSlide].backgroundImage})`,
           transform: `scale(1.1) translate(${mousePosition.x * 20}px, ${mousePosition.y * 20}px)`
         }}
       />
