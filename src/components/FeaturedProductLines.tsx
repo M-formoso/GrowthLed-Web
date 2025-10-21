@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Download, Sparkles, Palette, Star, ExternalLink } from "lucide-react";
+import { Sparkles, Palette, Star, ExternalLink } from "lucide-react";
 
 // Importar imágenes UFO DECO
 import ufoDeco1 from "@/assets/productos/ufo-deco-1.png";
@@ -23,8 +20,6 @@ import ufoIndustrial150wDetail2 from "@/assets/productos/ufo-industrial-150w-det
 import ufoIndustrial200wDetail from "@/assets/productos/ufo-industrial-200w-detail.png";
 
 const FeaturedProductLines = () => {
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const ufoProducts = [
     {
@@ -124,8 +119,16 @@ const FeaturedProductLines = () => {
   };
 
   const handleProductClick = (product: any) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
+    // Si tiene una sola imagen, abrirla directamente
+    if (product.images.length === 1) {
+      window.open(product.images[0], '_blank');
+    } else {
+      // Si tiene múltiples imágenes, abrir la primera en una nueva pestaña
+      // El usuario puede navegar desde ahí
+      product.images.forEach((img: string) => {
+        window.open(img, '_blank');
+      });
+    }
   };
 
   const renderCategorySection = (category: "deco" | "industrial") => {
@@ -163,7 +166,7 @@ const FeaturedProductLines = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={`grid gap-6 ${categoryProducts.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
           {categoryProducts.map((product) => (
             <MagneticCard key={product.id} strength={0.15}>
               <Card 
@@ -250,89 +253,6 @@ const FeaturedProductLines = () => {
         </div>
       </section>
 
-      {/* Modal con detalles del producto */}
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          {selectedProduct && (
-            <>
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold">{selectedProduct.name}</DialogTitle>
-                <p className="text-muted-foreground">{selectedProduct.category}</p>
-              </DialogHeader>
-
-              {/* Carrusel de imágenes */}
-              <div className="mt-4">
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {selectedProduct.images.map((image: string, index: number) => (
-                      <CarouselItem key={index}>
-                        <div className="relative aspect-square">
-                          <img
-                            src={image}
-                            alt={`${selectedProduct.name} - ${index + 1}`}
-                            className="w-full h-full object-contain rounded-lg"
-                          />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="left-4" />
-                  <CarouselNext className="right-4" />
-                </Carousel>
-              </div>
-
-              {/* Información del producto */}
-              <div className="mt-6 space-y-6">
-                {/* Rating y descripción */}
-                <div>
-                  <div className="flex items-center mb-3">
-                    <div className="flex mr-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i} 
-                          size={18} 
-                          className={`${i < Math.floor(selectedProduct.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                        />
-                      ))}
-                    </div>
-                    <span className="text-sm font-semibold">{selectedProduct.rating}</span>
-                  </div>
-                  <p className="text-base leading-relaxed">{selectedProduct.description}</p>
-                </div>
-
-                {/* Specs */}
-                <div>
-                  <h4 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                    <Sparkles className="w-5 h-5" />
-                    Especificaciones Técnicas
-                  </h4>
-                  <div className="grid grid-cols-3 gap-4">
-                    {selectedProduct.specs.map((spec: any, index: number) => (
-                      <div key={index} className="bg-muted/50 rounded-lg p-4 text-center">
-                        <div className="text-sm text-muted-foreground mb-1">{spec.label}</div>
-                        <div className="font-bold text-lg">{spec.value}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Características */}
-                <div>
-                  <h4 className="text-lg font-semibold mb-3">Características Principales</h4>
-                  <ul className="space-y-2">
-                    {selectedProduct.features.map((feature: string, index: number) => (
-                      <li key={index} className="flex items-start gap-2">
-                        <Badge variant="default" className="mt-1">✓</Badge>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </>
   );
 };

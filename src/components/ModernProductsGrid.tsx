@@ -2,11 +2,10 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Download, Star, ArrowRight, Shield, Zap, Factory, Sun, ExternalLink } from "lucide-react";
+import { Star, ArrowRight, Shield, Zap, Factory, Sun, ExternalLink } from "lucide-react";
 
 // Importar imágenes de productos
 import campanasLed from "@/assets/productos/campanas-led.jpg";
@@ -18,8 +17,6 @@ import antiexplosion from "@/assets/productos/antiexplosion.jpg";
 
 const ModernProductsGrid = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const categories = [
     { id: "all", name: "Todos los Productos", color: "from-primary to-primary/80" },
@@ -150,8 +147,8 @@ const ModernProductsGrid = () => {
     : products.filter(product => product.category === selectedCategory);
 
   const handleProductClick = (product: any) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
+    // Abrir el PDF directamente en una nueva pestaña
+    window.open(`/${product.catalogUrl}`, '_blank');
   };
 
   const getCategoryProducts = (category: string) => {
@@ -195,7 +192,7 @@ const ModernProductsGrid = () => {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className={`grid gap-6 ${categoryProducts.length === 1 ? 'grid-cols-1' : 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'}`}>
           {categoryProducts.map((product, index) => (
             <FloatingElement key={product.id} delay={index * 100} amplitude={5}>
               <MagneticCard strength={0.15}>
@@ -361,95 +358,6 @@ const ModernProductsGrid = () => {
         </div>
       </section>
 
-      {/* Modal con detalles del producto y PDF */}
-      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          {selectedProduct && (
-            <>
-              <DialogHeader>
-                <DialogTitle className="text-2xl font-bold">{selectedProduct.name}</DialogTitle>
-                <p className="text-muted-foreground">{selectedProduct.category}</p>
-              </DialogHeader>
-
-              {/* Vista previa del PDF */}
-              <div className="mt-4 space-y-4">
-                <div className="bg-muted/30 rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-4">
-                    <h4 className="text-lg font-semibold flex items-center gap-2">
-                      <Download className="w-5 h-5" />
-                      Catálogo PDF
-                    </h4>
-                    <Button 
-                      variant="default"
-                      onClick={() => window.open(`/${selectedProduct.catalogUrl}`, '_blank')}
-                    >
-                      <ExternalLink className="w-4 h-4 mr-2" />
-                      Abrir en nueva pestaña
-                    </Button>
-                  </div>
-                  
-                  {/* Iframe del PDF */}
-                  <div className="w-full h-[500px] rounded-lg overflow-hidden border-2 border-border">
-                    <iframe
-                      src={`/${selectedProduct.catalogUrl}`}
-                      className="w-full h-full"
-                      title={`Catálogo ${selectedProduct.name}`}
-                    />
-                  </div>
-                </div>
-
-                {/* Información del producto */}
-                <div className="space-y-4">
-                  {/* Rating y descripción */}
-                  <div>
-                    <div className="flex items-center mb-3">
-                      <div className="flex mr-2">
-                        {[...Array(5)].map((_, i) => (
-                          <Star 
-                            key={i} 
-                            size={18} 
-                            className={`${i < Math.floor(selectedProduct.rating) ? 'text-yellow-400 fill-current' : 'text-gray-300'}`} 
-                          />
-                        ))}
-                      </div>
-                      <span className="text-sm font-semibold">{selectedProduct.rating}</span>
-                    </div>
-                    <p className="text-base leading-relaxed">{selectedProduct.description}</p>
-                  </div>
-
-                  {/* Specs */}
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="text-sm text-muted-foreground mb-1">Potencia</div>
-                      <div className="font-bold text-lg">{selectedProduct.power}</div>
-                    </div>
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="text-sm text-muted-foreground mb-1">Eficiencia</div>
-                      <div className="font-bold text-lg">{selectedProduct.efficiency}</div>
-                    </div>
-                    <div className="bg-muted/50 rounded-lg p-4 text-center">
-                      <div className="text-sm text-muted-foreground mb-1">Vida Útil</div>
-                      <div className="font-bold text-lg">{selectedProduct.lifespan}</div>
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div>
-                    <h4 className="text-lg font-semibold mb-3">Características</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {selectedProduct.features.map((feature: string, index: number) => (
-                        <Badge key={index} variant="secondary" className="text-sm">
-                          {feature}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
     </>
   );
 };
