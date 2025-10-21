@@ -345,17 +345,18 @@ const ModernProductsGrid = () => {
                 />
               </div>
 
-              {/* PDF Embebido */}
+              {/* Botón para ver catálogo */}
               {selectedProduct.catalogUrl && (
                 <div>
                   <h3 className="font-semibold mb-3">Catálogo Técnico</h3>
-                  <div className="border rounded-lg overflow-hidden" style={{ height: '600px' }}>
-                    <iframe
-                      src={`/${selectedProduct.catalogUrl}`}
-                      className="w-full h-full"
-                      title={`Catálogo ${selectedProduct.name}`}
-                    />
-                  </div>
+                  <Button 
+                    size="lg" 
+                    className="w-full gap-2"
+                    onClick={() => window.open(`/${selectedProduct.catalogUrl}`, '_blank')}
+                  >
+                    <ExternalLink size={20} />
+                    Abrir Catálogo Técnico (PDF)
+                  </Button>
                 </div>
               )}
             </div>
