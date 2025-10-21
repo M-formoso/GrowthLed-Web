@@ -53,13 +53,13 @@ const CorporateVideoSection = () => {
                   loop
                   playsInline
                 >
-                  <source src="/videos/estacion-shell.mp4" type="video/mp4" />
+                  <source src="/videos/corporate-b2grow.mp4" type="video/mp4" />
                 </video>
                 
                 {/* Overlay text */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-background/90 to-transparent">
-                  <p className="text-white text-xl font-semibold">Instalaciones Eléctricas Industriales</p>
-                  <p className="text-white/80 text-sm">Años de experiencia en obras de gran envergadura</p>
+                  <p className="text-white text-xl font-semibold">Innovación en Iluminación LED</p>
+                  <p className="text-white/80 text-sm">Soluciones inteligentes para cada proyecto</p>
                 </div>
               </div>
             </Card>
