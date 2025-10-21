@@ -77,28 +77,24 @@ const FeaturedProductLines = () => {
   const currentLine = productLines[activeTab];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-muted/20">
+    <section className="py-16 bg-gradient-to-b from-muted/20 to-background">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium">
-            <Sparkles className="w-4 h-4 mr-2" />
-            Líneas Destacadas
-          </Badge>
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={6}
+            containerClassName="mb-6"
+            textClassName="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent"
+          >
+            Líneas UFO Destacadas
+          </ScrollReveal>
           
-          <AnimatedText
-            text="Nuestras Líneas UFO"
-            variant="gradient"
-            className="text-4xl md:text-5xl font-bold mb-4"
-            delay={200}
-          />
-          
-          <AnimatedText
-            text="Tecnología LED de última generación para cada necesidad"
-            variant="fadeUp"
-            className="text-lg text-muted-foreground max-w-2xl mx-auto"
-            delay={400}
-          />
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Tecnología LED de última generación para cada necesidad
+          </p>
         </div>
 
         {/* Tabs */}

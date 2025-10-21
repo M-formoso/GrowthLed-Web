@@ -6,6 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { AnimatedText } from "@/components/ui/animated-text";
 import { MagneticCard } from "@/components/ui/magnetic-card";
 import { FloatingElement, ParticleBackground } from "@/components/ui/floating-elements";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Eye, Download, Star, ArrowRight, Zap, X } from "lucide-react";
 
 // Importar imágenes de productos
@@ -140,32 +141,26 @@ const ModernProductsGrid = () => {
   };
 
   return (
-    <section className="relative py-24 bg-gradient-to-br from-background via-background/98 to-background overflow-hidden">
+    <section className="relative py-16 bg-gradient-to-br from-background via-background/98 to-muted/20 overflow-hidden">
       <ParticleBackground particleCount={25} />
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <FloatingElement delay={0} amplitude={5}>
-            <Badge variant="outline" className="mb-4 px-4 py-2 text-sm font-medium">
-              <Zap className="w-4 h-4 mr-2" />
-              Catálogo de Productos
-            </Badge>
-          </FloatingElement>
+        <div className="text-center mb-12">
+          <ScrollReveal
+            baseOpacity={0.2}
+            enableBlur={true}
+            baseRotation={2}
+            blurStrength={6}
+            containerClassName="mb-6"
+            textClassName="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent"
+          >
+            Catálogo Completo de Productos
+          </ScrollReveal>
           
-          <AnimatedText
-            text="Tecnología LED de Vanguardia"
-            variant="gradient"
-            className="text-5xl md:text-6xl font-bold mb-6"
-            delay={200}
-          />
-          
-          <AnimatedText
-            text="Descubrí nuestra amplia gama de productos LED diseñados para cada necesidad específica"
-            variant="fadeUp"
-            className="text-xl text-muted-foreground max-w-3xl mx-auto"
-            delay={400}
-          />
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Descubrí nuestra amplia gama de productos LED diseñados para cada necesidad específica
+          </p>
         </div>
 
         {/* Filtros de categorías */}
