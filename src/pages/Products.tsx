@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import FeaturedProductLines from "@/components/FeaturedProductLines";
 import ModernProductsGrid from "@/components/ModernProductsGrid";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -9,6 +10,7 @@ const Products = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20">
+        <FeaturedProductLines />
         <ModernProductsGrid />
       </main>
       <ContactSection />
