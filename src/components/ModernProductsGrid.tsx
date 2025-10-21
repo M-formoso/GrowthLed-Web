@@ -337,11 +337,11 @@ const ModernProductsGrid = () => {
               </div>
 
               {/* Imagen del producto */}
-              <div className="rounded-lg overflow-hidden border">
+              <div className="rounded-lg overflow-hidden border max-w-md mx-auto">
                 <img 
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
-                  className="w-full h-auto object-contain"
+                  className="w-full h-auto object-contain max-h-64"
                 />
               </div>
 
