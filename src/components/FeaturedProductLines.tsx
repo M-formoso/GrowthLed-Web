@@ -1,17 +1,7 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
-} from "@/components/ui/carousel";
-import { AnimatedText } from "@/components/ui/animated-text";
+import { Card } from "@/components/ui/card";
+import { MagneticCard } from "@/components/ui/magnetic-card";
 import ScrollReveal from "@/components/ui/ScrollReveal";
-import { Sparkles, ChevronRight, Zap, Shield, Thermometer } from "lucide-react";
+import { Download, Sparkles, Palette } from "lucide-react";
 
 // Importar imágenes UFO DECO
 import ufoDeco1 from "@/assets/productos/ufo-deco-1.png";
@@ -28,212 +18,151 @@ import ufoIndustrial150wDetail2 from "@/assets/productos/ufo-industrial-150w-det
 import ufoIndustrial200wDetail from "@/assets/productos/ufo-industrial-200w-detail.png";
 
 const FeaturedProductLines = () => {
-  const [activeTab, setActiveTab] = useState<"deco" | "industrial">("deco");
-
-  const productLines = {
-    deco: {
+  const ufoProducts = [
+    {
+      id: "ufo-deco",
       name: "UFO DECO",
-      subtitle: "Línea Deco adaptable a todos los ambientes",
-      description: "Iluminación LED elegante y eficiente para espacios comerciales y residenciales. Diseño minimalista que se adapta perfectamente a cualquier ambiente.",
-      gradient: "from-amber-500 via-orange-500 to-red-500",
-      images: [ufoDeco1, ufoDeco2, ufoDeco3, ufoDecoSpecs],
-      features: [
-        "Exterior blanco o negro a elección",
-        "Frente opalino con sensor de presencia",
-        "Potencia seleccionable: alta-media-baja",
-        "Ángulo dinámico: 60-90-120°",
-        "Color seleccionable: blanco cálido, neutro o frío"
-      ],
-      specs: undefined
+      category: "Línea Deco",
+      description: "Línea Deco adaptable a todos los ambientes. Diseño elegante con potencia y ángulo seleccionable.",
+      image: ufoDeco1,
+      images: [ufoDeco1, ufoDeco2, ufoDeco3, ufoDecoSpecs]
+    },
+    {
+      id: "ufo-industrial-100w",
+      name: "UFO INDUSTRIAL 100W",
+      category: "Línea Industrial",
+      description: "Luminaria LED 100W de alto rendimiento. 16,000 Lm con eficiencia superior a 160Lm/W.",
+      image: ufoIndustrial100w,
+      images: [ufoIndustrial100w]
+    },
+    {
+      id: "ufo-industrial-150w",
+      name: "UFO INDUSTRIAL 150W",
+      category: "Línea Industrial",
+      description: "Luminaria LED 150W de alto rendimiento. 24,000 Lm con eficiencia superior a 160Lm/W.",
+      image: ufoIndustrial150w,
+      images: [ufoIndustrial150w, ufoIndustrial150wDetail1, ufoIndustrial150wDetail2]
+    },
+    {
+      id: "ufo-industrial-200w",
+      name: "UFO INDUSTRIAL 200W",
+      category: "Línea Industrial",
+      description: "Luminaria LED 200W de alto rendimiento. 32,000 Lm con eficiencia superior a 160Lm/W.",
+      image: ufoIndustrial200w,
+      images: [ufoIndustrial200w, ufoIndustrial200wDetail]
+    }
+  ];
+
+  const categoryIntros = {
+    deco: {
+      icon: Palette,
+      title: "Línea UFO DECO",
+      description: "Iluminación LED elegante y eficiente para espacios comerciales y residenciales. Diseño minimalista que se adapta perfectamente a cualquier ambiente con potencia y ángulo seleccionable."
     },
     industrial: {
-      name: "UFO INDUSTRIAL",
-      subtitle: "Versatilidad total en potencia y eficiencia",
-      description: "Luminarias LED de alto rendimiento con eficiencia superior a 160Lm/W. Diseñadas para naves industriales, depósitos y espacios que requieren máxima iluminación. Sistema de potencia seleccionable (High/Mid/Low) y temperatura de color ajustable.",
-      gradient: "from-blue-600 via-cyan-500 to-teal-500",
-      images: [
-        ufoIndustrial100w, 
-        ufoIndustrial150w, 
-        ufoIndustrial200w,
-        ufoIndustrial150wDetail1,
-        ufoIndustrial150wDetail2,
-        ufoIndustrial200wDetail
-      ],
-      features: [
-        "Potencias: 100W (16,000Lm), 150W (24,000Lm), 200W (32,000Lm)",
-        "Eficiencia: 140-160Lm/W con LEDs Lumileds/Samsung",
-        "Protección IP65 e IK10 con disipador de alta performance",
-        "3 ángulos en una luminaria: 60°/90°/120° seleccionables",
-        "CCT ajustable: 3000K/5500K/6500K - Garantía 5 años"
-      ],
-      specs: [
-        { icon: Zap, label: "160Lm/W", description: "Eficiencia Superior" },
-        { icon: Shield, label: "IP65/IK10", description: "Máxima Protección" },
-        { icon: Thermometer, label: "-30°C~+45°C", description: "Amplio Rango" }
-      ]
+      icon: Sparkles,
+      title: "Línea UFO INDUSTRIAL",
+      description: "Luminarias LED de alto rendimiento con eficiencia superior a 160Lm/W. Diseñadas para naves industriales, depósitos y espacios que requieren máxima iluminación."
     }
   };
 
-  const currentLine = productLines[activeTab];
+  const handleOpenImage = (images: string[]) => {
+    // Abrir la primera imagen en una nueva pestaña
+    if (images && images.length > 0) {
+      window.open(images[0], '_blank');
+    }
+  };
+
+  const renderCategorySection = (category: "deco" | "industrial") => {
+    const intro = categoryIntros[category];
+    const Icon = intro.icon;
+    const categoryProducts = ufoProducts.filter(p => 
+      category === "deco" ? p.id === "ufo-deco" : p.id.includes("industrial")
+    );
+
+    return (
+      <div key={category} className="mb-20">
+        {/* Intro Text */}
+        <div className="mb-12 text-center">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Icon className="w-8 h-8 text-primary" />
+            <ScrollReveal
+              baseOpacity={0.2}
+              enableBlur={true}
+              baseRotation={2}
+              blurStrength={6}
+              textClassName="text-2xl md:text-3xl font-bold"
+            >
+              {intro.title}
+            </ScrollReveal>
+          </div>
+          <ScrollReveal
+            baseOpacity={0.3}
+            enableBlur={true}
+            baseRotation={1}
+            blurStrength={4}
+            containerClassName="max-w-3xl mx-auto"
+            textClassName="text-lg text-muted-foreground"
+          >
+            {intro.description}
+          </ScrollReveal>
+        </div>
+
+        {/* Products Grid */}
+        <div className={`grid gap-8 ${categoryProducts.length === 1 ? 'md:grid-cols-1 max-w-2xl mx-auto' : 'md:grid-cols-2 lg:grid-cols-3'}`}>
+          {categoryProducts.map((product) => (
+            <MagneticCard key={product.id} strength={0.15}>
+              <Card 
+                className="group overflow-hidden cursor-pointer hover:shadow-2xl transition-all duration-500 border-2 hover:border-primary/50"
+                onClick={() => handleOpenImage(product.images)}
+              >
+                <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  
+                  {/* Overlay with info */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                    <div className="text-center mb-4">
+                      <h3 className="text-xl font-bold text-foreground mb-2">{product.name}</h3>
+                      <p className="text-sm text-muted-foreground">{product.description}</p>
+                    </div>
+                    <div className="flex items-center gap-2 text-primary font-semibold">
+                      <Download className="w-5 h-5" />
+                      <span>Ver Detalles</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Card footer */}
+                <div className="p-4 bg-card">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-xs text-muted-foreground mb-1">{product.category}</p>
+                      <h3 className="font-semibold text-foreground">{product.name}</h3>
+                    </div>
+                    <Download className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
+                </div>
+              </Card>
+            </MagneticCard>
+          ))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <section className="py-16 bg-gradient-to-b from-muted/20 to-background">
       <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <ScrollReveal
-            baseOpacity={0.2}
-            enableBlur={true}
-            baseRotation={2}
-            blurStrength={6}
-            containerClassName="mb-6"
-            textClassName="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-primary to-primary bg-clip-text text-transparent"
-          >
-            Líneas UFO Destacadas
-          </ScrollReveal>
-          
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Tecnología LED de última generación para cada necesidad
-          </p>
-        </div>
+        {/* Línea UFO DECO */}
+        {renderCategorySection("deco")}
 
-        {/* Tabs */}
-        <div className="flex justify-center gap-4 mb-12">
-          <Button
-            size="lg"
-            variant={activeTab === "deco" ? "default" : "outline"}
-            onClick={() => setActiveTab("deco")}
-            className={`
-              px-8 py-6 text-lg font-semibold transition-all duration-300
-              ${activeTab === "deco" 
-                ? `bg-gradient-to-r ${productLines.deco.gradient} text-white border-0 shadow-lg` 
-                : 'hover:bg-muted'
-              }
-            `}
-          >
-            UFO DECO
-          </Button>
-          <Button
-            size="lg"
-            variant={activeTab === "industrial" ? "default" : "outline"}
-            onClick={() => setActiveTab("industrial")}
-            className={`
-              px-8 py-6 text-lg font-semibold transition-all duration-300
-              ${activeTab === "industrial" 
-                ? `bg-gradient-to-r ${productLines.industrial.gradient} text-white border-0 shadow-lg` 
-                : 'hover:bg-muted'
-              }
-            `}
-          >
-            UFO INDUSTRIAL
-          </Button>
-        </div>
-
-        {/* Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Carrusel de imágenes */}
-          <div className="relative">
-            <Card className="overflow-hidden border-2 shadow-2xl">
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {currentLine.images.map((image, index) => (
-                    <CarouselItem key={index}>
-                      <div className="relative aspect-square">
-                        <img
-                          src={image}
-                          alt={`${currentLine.name} - ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                        <div className={`absolute inset-0 bg-gradient-to-br ${currentLine.gradient} opacity-10`} />
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="left-4" />
-                <CarouselNext className="right-4" />
-              </Carousel>
-            </Card>
-            
-            {/* Badge flotante */}
-            <div className={`absolute -top-4 -right-4 bg-gradient-to-r ${currentLine.gradient} text-white px-6 py-3 rounded-full shadow-lg font-bold text-lg z-10`}>
-              {currentLine.name}
-            </div>
-          </div>
-
-          {/* Información del producto */}
-          <div className="space-y-6">
-            <div>
-              <ScrollReveal
-                baseOpacity={0.2}
-                enableBlur={true}
-                baseRotation={2}
-                blurStrength={6}
-                containerClassName="mb-4"
-                textClassName="text-3xl font-bold"
-              >
-                {currentLine.name}
-              </ScrollReveal>
-              
-              <ScrollReveal
-                baseOpacity={0.3}
-                enableBlur={true}
-                baseRotation={1}
-                blurStrength={4}
-                containerClassName="mb-4"
-                textClassName="text-xl text-muted-foreground"
-              >
-                {currentLine.subtitle}
-              </ScrollReveal>
-              
-              <p className="text-base leading-relaxed">
-                {currentLine.description}
-              </p>
-            </div>
-
-            {/* Características */}
-            <div className="space-y-3">
-              <h4 className="text-lg font-semibold flex items-center gap-2">
-                <Sparkles className="w-5 h-5" />
-                Características Principales
-              </h4>
-              <ul className="space-y-2">
-                {currentLine.features.map((feature, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <ChevronRight className="w-5 h-5 mt-0.5 flex-shrink-0 text-primary" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Specs adicionales para Industrial */}
-            {activeTab === "industrial" && currentLine.specs && (
-              <div className="grid grid-cols-3 gap-4 pt-4 border-t">
-                {currentLine.specs.map((spec, index) => {
-                  const IconComponent = spec.icon;
-                  return (
-                    <div key={index} className="text-center p-4 rounded-lg bg-muted/50">
-                      <IconComponent className="w-8 h-8 mx-auto mb-2 text-primary" />
-                      <div className="font-bold text-lg">{spec.label}</div>
-                      <div className="text-xs text-muted-foreground">{spec.description}</div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-
-            {/* CTA */}
-            <div className="pt-4">
-              <Button 
-                size="lg"
-                className={`bg-gradient-to-r ${currentLine.gradient} text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300`}
-              >
-                Solicitar Información
-                <ChevronRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
+        {/* Línea UFO INDUSTRIAL */}
+        {renderCategorySection("industrial")}
       </div>
     </section>
   );
