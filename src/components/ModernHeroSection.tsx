@@ -113,7 +113,7 @@ const ModernHeroSection = () => {
               key={`title-${currentSlide}`}
               text={slides[currentSlide].title}
               variant="gradient"
-              className="text-6xl md:text-8xl font-bold mb-4"
+              className="text-4xl md:text-6xl font-medium mb-4"
               delay={100}
             />
             
@@ -121,7 +121,7 @@ const ModernHeroSection = () => {
               key={`subtitle-${currentSlide}`}
               text={slides[currentSlide].subtitle}
               variant="splitWords"
-              className="text-2xl md:text-3xl font-light text-muted-foreground mb-6"
+              className="text-xl md:text-2xl font-light text-muted-foreground mb-6"
               delay={300}
             />
 
@@ -129,7 +129,7 @@ const ModernHeroSection = () => {
               key={`description-${currentSlide}`}
               text={slides[currentSlide].description}
               variant="fadeUp"
-              className="text-lg text-muted-foreground max-w-2xl mx-auto"
+              className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto font-light"
               delay={500}
             />
           </div>
