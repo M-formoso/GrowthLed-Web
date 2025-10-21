@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import growthledLogo from "@/assets/growthled-logo-new.png";
+import growthledLogo from "@/assets/growthled-main-logo.png";
 import b2growLogo from "@/assets/b2grow-logo.png";
 
 const Header = () => {

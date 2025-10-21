@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
+import growthledLogo from "@/assets/growthled-main-logo.png";
 
 const Footer = () => {
   return (
@@ -13,9 +14,9 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center">
               <img 
-                src="/src/assets/growthled-logo.jpeg" 
+                src={growthledLogo} 
                 alt="GROWTHLED Logo" 
-                className="w-16 h-16 object-contain"
+                className="w-24 h-24 object-contain"
               />
             </div>
             <p className="text-slate-300 text-sm leading-relaxed">
